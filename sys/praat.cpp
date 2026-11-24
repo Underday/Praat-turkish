@@ -2092,6 +2092,8 @@ static void executeStartUpFile (MelderFolder startUpDirectory, conststring32 fil
 	}
 #endif
 
+void praat_ceviri_acilis ();   // sys/praat_ceviri.cpp
+
 void praat_run () {
 	trace (U"adding menus, second round");
 	praat_addMenus2 ();
@@ -2714,6 +2716,7 @@ void praat_run () {
 				Melder_flushError ();
 			}
 		}
+		praat_ceviri_acilis ();   // Türkçe arayüz: açılış penceresi (sys/praat_ceviri.cpp)
 		//TRACE
 		trace (U"Before main event loop: ", Melder_stopwatch ());
 

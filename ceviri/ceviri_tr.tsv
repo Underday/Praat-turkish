@@ -841,3 +841,14 @@ Text reading settings...	Metin okuma ayarları...
 Text writing settings...	Metin yazma ayarları...
 CJK font style settings...	CJK yazı tipi ayarları...
 AI settings...	Yapay zekâ ayarları...
+
+# Açılış penceresi (sys/praat_ceviri.cpp)
+Turkish interface	Türkçe arayüz
+Praat Turkish interface	Praat Türkçe arayüz
+Version:	Sürüm:
+Translation:	Çeviri:
+A new version is available:	Yeni sürüm var:
+Could not check for updates.	Güncelleme denetlenemedi.
+You are using the latest version.	En son sürümü kullanıyorsunuz.
+Do not show again until a new version	Yeni sürüm çıkana dek gösterme
+Open download page	İndirme sayfasını aç

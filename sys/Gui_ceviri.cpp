@@ -375,7 +375,27 @@ void Gui_ceviri_turkceAyarla (bool turkce) {
 	structMelderFile dosya { };
 	if (! ayarDosyasi (& dosya))
 		return;
-	MelderFile_writeText_i (& dosya, turkce ? U"dil: tr\n" : U"dil: en\n", kMelder_textOutputEncoding::UTF8);
+	/*
+		Dosyadaki öteki satırlar (ör. açılış penceresi ayarı) korunur, yalnızca "dil:" satırı yenilenir.
+	*/
+	std::u32string yeni = turkce ? U"dil: tr\n" : U"dil: en\n";
+	try {
+		if (MelderFile_exists (& dosya)) {
+			const std::u32string eski (MelderFile_readText (& dosya).get ());
+			size_t bas = 0;
+			while (bas < eski.size ()) {
+				size_t son = eski.find (U'\n', bas);
+				if (son == std::u32string::npos)
+					son = eski.size ();
+				if (son > bas && eski.compare (bas, 5, U"dil: ") != 0)
+					yeni += eski.substr (bas, son - bas) + U"\n";
+				bas = son + 1;
+			}
+		}
+	} catch (MelderError) {
+		Melder_clearError ();
+	}
+	MelderFile_writeText_i (& dosya, yeni.c_str (), kMelder_textOutputEncoding::UTF8);
 }
 
 conststring32 Gui_tr (conststring32 english) {
