@@ -33,13 +33,13 @@ Bu dosya Praat arayüzünün Türkçeye çevirisinde kullanılan terimleri ve ge
 | cepstrum | kepstrum | |
 | cepstral peak prominence (CPP) | kepstral tepe belirginliği (CPP) | |
 | harmonicity, HNR | harmoniklik, harmonik/gürültü oranı (HNR) | |
-| jitter | jitter (frekans pertürbasyonu) | Terim korunur, açıklama klinik ses yazınındaki "pertürbasyon" ile |
-| shimmer | shimmer (genlik pertürbasyonu) | Terim korunur, açıklama klinik ses yazınındaki "pertürbasyon" ile |
+| jitter | jitter (frekans pertürbasyonu) | Terim korunur, açıklama klinik ses yazınındaki "pertürbasyon" ile. Önceki açıklama "frekans düzensizliği" idi. **Tartışmaya açık.** |
+| shimmer | shimmer (genlik pertürbasyonu) | Terim korunur, açıklama klinik ses yazınındaki "pertürbasyon" ile. **Tartışmaya açık.** |
 | voice report | ses raporu | |
 | voice breaks | ses kırılmaları | |
 | voiced / voiceless | ötümlü / ötümsüz | Türkçe dilbilimde yerleşik. DKT'de "sesli/sessiz" de geçer, ancak "sesli" ünlü anlamıyla karışır |
 | vowel / consonant | ünlü / ünsüz | |
-| pulses (glottal pulses) | titreşim noktaları (pulses) | Praat'taki PointProcess nesnesi |
+| pulses (glottal pulses) | glottal darbeler, kısaca darbe | Praat'taki PointProcess nesnesi. Klinik yazındaki "glottal pulse" kullanımıyla örtüşüyor. Önceki karşılık "titreşim noktaları" idi. **Tartışmaya açık.** |
 | glottal | glottal | |
 | periodicity | periyodiklik | |
 | autocorrelation | otokorelasyon | |
@@ -118,6 +118,11 @@ Bu dosya Praat arayüzünün Türkçeye çevirisinde kullanılan terimleri ve ge
 | De-emphasis | Ön vurgu iptali | Tek başına "vurgu" konuşmadaki vurguyla (stress) karışır |
 
 ## Açık terim soruları
+
+Aşağıdakiler ve tablolarda "Tartışmaya açık" diye işaretlenenler için öneri ve itirazlar konu (issue) olarak açılabilir.
+
+- "pulses" için "glottal darbeler" seçildi (önceki karşılık "titreşim noktaları").
+- jitter ve shimmer açıklamasında "pertürbasyon" seçildi (önceki karşılık "düzensizlik").
 
 - "pitch" için "perde (F0)" mi yoksa yalnızca "temel frekans" mı? Şimdilik menüde "Perde (F0)" kullanılıyor.
 - "voiced / voiceless" için "ötümlü / ötümsüz" seçildi. DKT öğrencileri için "sesli / sessiz" daha tanıdık olabilir.

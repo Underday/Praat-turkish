@@ -308,7 +308,7 @@ Spectrogram	Spektrogram
 Pitch	Perde (F0)
 Intensity	Şiddet
 Formants	Formantlar
-Pulses	Titreşim noktaları (pulses)
+Pulses	Glottal darbeler
 Interval	Aralık
 Boundary	Sınır
 Tier	Katman
@@ -487,15 +487,15 @@ Draw formants to picture window:	Formantları çizim penceresine çiz:
 Draw visible formant contour...	Görünen formant eğrisini çiz...
 Extract formants to objects window:	Formantları nesneler penceresine çıkar:
 Extract visible formant contour	Görünen formant eğrisini çıkar
-Show pulses	Titreşim noktalarını göster
-Advanced pulses settings...	Gelişmiş titreşim noktası ayarları...
-Query pulses:	Titreşim noktalarını sorgula:
+Show pulses	Darbeleri göster
+Advanced pulses settings...	Gelişmiş darbe ayarları...
+Query pulses:	Darbeleri sorgula:
 Voice report	Ses raporu (jitter, shimmer, HNR)
-Pulse listing	Titreşim noktası listesi
-Draw pulses to picture window:	Titreşim noktalarını çizim penceresine çiz:
-Draw visible pulses...	Görünen titreşim noktalarını çiz...
-Extract pulses to objects window:	Titreşim noktalarını nesneler penceresine çıkar:
-Extract visible pulses	Görünen titreşim noktalarını çıkar
+Pulse listing	Darbe listesi
+Draw pulses to picture window:	Darbeleri çizim penceresine çiz:
+Draw visible pulses...	Görünen darbeleri çiz...
+Extract pulses to objects window:	Darbeleri nesneler penceresine çıkar:
+Extract visible pulses	Görünen darbeleri çıkar
 TextGrid settings...	TextGrid ayarları...
 Convert entire TextGrid to backslash trigraphs	Bütün TextGrid'i ters bölü kodlarına dönüştür
 Convert entire TextGrid to Unicode	Bütün TextGrid'i Unicode'a dönüştür
@@ -698,8 +698,8 @@ derived spectrogram	türetilmiş spektrogram
 derived formants	türetilmiş formantlar
 derived intensity	türetilmiş şiddet
 derived pitch	türetilmiş perde
-derived pulses	türetilmiş titreşim noktaları
-pitch derived from pulses	titreşim noktalarından türetilmiş perde
+derived pulses	türetilmiş darbeler
+pitch derived from pulses	darbelerden türetilmiş perde
 Total duration %f seconds	Toplam süre %f saniye
 Visible part %f seconds	Görünen bölüm %f saniye
 
@@ -740,7 +740,7 @@ Date	Tarih
 @CURSOR	İMLECİN
 @seconds	saniye
 Pitch:	Perde (F0):
-Pulses:	Titreşim noktaları (pulses):
+Pulses:	Glottal darbeler:
 Voicing:	Ötümlülük:
 Jitter:	Jitter (frekans pertürbasyonu):
 Shimmer:	Shimmer (genlik pertürbasyonu):
@@ -751,7 +751,7 @@ Mean pitch	Ortalama perde
 Standard deviation	Standart sapma
 Minimum pitch	En düşük perde
 Maximum pitch	En yüksek perde
-Number of pulses	Titreşim noktası sayısı
+Number of pulses	Darbe sayısı
 Number of periods	Periyot sayısı
 Mean period	Ortalama periyot
 Standard deviation of period	Periyodun standart sapması
@@ -1210,9 +1210,9 @@ To DTW...	DTW hesapla...
 To ParamCurve	ParamCurve oluştur
 ## Pitch
 Pitch help	Pitch yardımı
-Play pulses	Titreşim noktalarını çal
+Play pulses	Darbeleri çal
 Hum	Mırıltı olarak çal
-To Sound (pulses)	Sound oluştur (titreşim noktaları)
+To Sound (pulses)	Sound oluştur (darbeler)
 To Sound (hum)	Sound oluştur (mırıltı)
 To Sound (sine)...	Sound oluştur (sinüs)...
 Draw logarithmic...	Logaritmik çiz...
@@ -1372,7 +1372,7 @@ Play (LPC)	Çal (LPC)
 Get resynthesis (overlap-add)	Yeniden sentezi al (örtüşme ekleme)
 Get resynthesis (LPC)	Yeniden sentezi al (LPC)
 Extract original sound	Özgün sesi çıkar
-Extract pulses	Titreşim noktalarını çıkar
+Extract pulses	Darbeleri çıkar
 Extract pitch tier	Perde katmanını çıkar
 Extract duration tier	Süre katmanını çıkar
 Replace pitch tier?	Perde katmanını değiştir?
