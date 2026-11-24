@@ -8,6 +8,9 @@ include ortak.praat
 form Voice quality report
 	positive Pitch_floor_(Hz) 75
 	positive Pitch_ceiling_(Hz) 500
+	optionmenu Trend_line_fit_(CPPS) 1
+		option Robust
+		option Least squares
 	sentence Csv_file_(optional)
 endform
 
@@ -19,7 +22,7 @@ endif
 for i to size (sesler#)
 	selectObject: sesler# [i]
 	ad$ = selected$ ("Sound")
-	@sesKalitesi: sesler# [i], 0, 0, pitch_floor, pitch_ceiling
+	@sesKalitesi: sesler# [i], 0, 0, pitch_floor, pitch_ceiling, trend_line_fit$
 	appendInfoLine: ""
 	appendInfoLine: "Sound: ", ad$
 	@sesKalitesiniYaz

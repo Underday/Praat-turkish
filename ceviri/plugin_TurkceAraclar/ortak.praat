@@ -7,7 +7,9 @@
 
 # Seçili tek Sound için ses kalitesi ölçümleri (tmin = tmax = 0 ise bütün ses).
 # Sonuçlar .alan değişkenlerinde döner. Ölçülemeyen değerler undefined olur.
-procedure sesKalitesi: .ses, .tmin, .tmax, .f0min, .f0max
+# .uyum$: CPPS eğilim çizgisi uydurması, "Robust" (tekrarlanabilir) ya da "Least squares" (hızlı, değerler farklı).
+# Praat formlarının varsayılanı "Robust slow" rastgele örnekleme kullanır, her çalıştırmada biraz farklı sonuç verir.
+procedure sesKalitesi: .ses, .tmin, .tmax, .f0min, .f0max, .uyum$
 	selectObject: .ses
 	if .tmin = 0 and .tmax = 0
 		.tmin = Get start time
@@ -36,11 +38,11 @@ procedure sesKalitesi: .ses, .tmin, .tmax, .f0min, .f0max
 	.shimApq11 = extractNumber (.rapor$, "Shimmer (apq11): ")
 	.hnr = extractNumber (.rapor$, "Mean harmonics-to-noise ratio: ")
 	removeObject: .pitch, .noktalar
-	# CPPS, Praat'ın varsayılan ayarlarıyla
+	# CPPS: Praat'ın kepstrogram ayarları, eğilim çizgisi uydurması seçilebilir (yukarıdaki nota bakın).
 	selectObject: .ses
 	.parca = Extract part: .tmin, .tmax, "rectangular", 1, "no"
 	.kepstrogram = To PowerCepstrogram: 60, 0.002, 5000, 50
-	.cpps = Get CPPS: "yes", 0.02, 0.0005, 60, 330, 0.05, "parabolic", 0.001, 0.05, "Straight", "Robust"
+	.cpps = Get CPPS: "yes", 0.02, 0.0005, 60, 330, 0.05, "parabolic", 0.001, 0.05, "Straight", .uyum$
 	removeObject: .parca, .kepstrogram
 endproc
 

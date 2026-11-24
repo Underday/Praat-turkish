@@ -86,6 +86,7 @@ Windows sürümü şimdiye kadar yalnızca Wine altında denendi.
 ![Ses kalitesi raporu](ceviri/ekran/eklenti-ses-kalitesi.png)
 
 - Jitter, shimmer ve HNR, Praat'ın Voice report çıktısından okunur, yani ses raporuyla birebir aynıdır. Pitch "raw cross-correlation" yöntemiyle hesaplanır (Praat kılavuzunun ses analizi önerisi).
+- CPPS, Praat'ın kepstrogram ayarlarıyla ve "Robust" eğilim çizgisi uydurmasıyla ölçülür. Praat formlarının varsayılanı olan "Robust slow" rastgele örnekleme kullanıyor ve aynı seste her çalıştırmada biraz farklı değer veriyor (denemede 0,6 dB'ye kadar). Bu yüzden tekrarlanabilir olan "Robust" seçildi. Uzun kayıtlarda yavaştır (10 saniyelik seste birkaç saniye). Formdaki "En küçük kareler" seçeneği birkaç kat hızlıdır, ancak değerleri 0,5 ile 3 dB farklı çıkabilir, karşılaştırma yapılacaksa aynı yöntem kullanılmalı.
 - Normatif eşik gösterilmez. Değerlerin yorumu kullanıcıya bırakıldı.
 - Ses kalitesi raporu seçili Sound'un tamamını ölçer. Uzatılmış ünlü ölçülecekse önce o bölüm ayrı bir Sound olarak çıkarılmalı.
 - Praat 7 eklenti scriptlerini tam güvenilir saymaz. Dosya yazan bir komut (CSV, WAV, TextGrid kaydı) ilk çalıştırmada onay ister. "Bu scripte bundan sonra güveniyorum" seçeneği o oturum için yeniden sormayı kaldırır. CSV alanı boş bırakılırsa tek ses komutları hiç sormaz.

@@ -8,6 +8,9 @@ form Voice quality of folder
 	sentence Folder
 	positive Pitch_floor_(Hz) 75
 	positive Pitch_ceiling_(Hz) 500
+	optionmenu Trend_line_fit_(CPPS) 1
+		option Robust
+		option Least squares
 	sentence Csv_file voice_quality.csv
 endform
 
@@ -24,7 +27,7 @@ writeInfoLine: "Voice quality of folder: ", folder$
 for i to sesDosyalari.n
 	dosya$ = sesDosyalari.dosyalar$# [i]
 	ses = Read from file: folder$ + "/" + dosya$
-	@sesKalitesi: ses, 0, 0, pitch_floor, pitch_ceiling
+	@sesKalitesi: ses, 0, 0, pitch_floor, pitch_ceiling, trend_line_fit$
 	@sesKalitesiCsvSatiri: csvYolu$, dosya$
 	appendInfoLine: dosya$, tab$, "Jitter (local): ", fixed$ (sesKalitesi.jitYerel * 100, 3), " %", tab$, "HNR: ", fixed$ (sesKalitesi.hnr, 2), " dB", tab$, "CPPS: ", fixed$ (sesKalitesi.cpps, 2), " dB"
 	removeObject: ses

@@ -1716,3 +1716,9 @@ Cepstral peak prominence (CPP)	Kepstral tepe belirginliği (CPP)
 Quefrency of peak	Tepenin kuefrensi
 Frequency of peak	Tepenin frekansı
 CPPS (whole sound)	CPPS (bütün ses)
+Trend line fit (CPPS)	Eğilim çizgisi uydurması (CPPS)
+Trend line fit	Eğilim çizgisi uydurması
+Robust	Gürbüz
+Least squares	En küçük kareler
+CPPS of whole sound	Bütün sesin CPPS değeri
+Robust slow	Gürbüz, yavaş
