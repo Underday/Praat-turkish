@@ -112,7 +112,7 @@ GuiLabel GuiLabel_create (GuiForm parent, int left, int right, int top, int bott
 		gtk_label_set_line_wrap (GTK_LABEL (my d_widget), true);
 		gtk_label_set_justify (GTK_LABEL (my d_widget), flags & GuiLabel_RIGHT ? GTK_JUSTIFY_RIGHT : flags & GuiLabel_CENTRE ? GTK_JUSTIFY_CENTER : GTK_JUSTIFY_LEFT);
 	#elif motif
-		my d_widget = _Gui_initializeWidget (xmLabelWidgetClass, parent -> d_widget, labelText);
+		my d_widget = _Gui_initializeWidget (xmLabelWidgetClass, parent -> d_widget, Gui_tr (labelText));
 		_GuiObject_setUserData (my d_widget, me.get());
 		my d_widget -> window = CreateWindow (L"static", Melder_peek32toW (_GuiWin_expandAmpersands (my d_widget -> name.get())),
 			WS_CHILD
@@ -163,7 +163,7 @@ void GuiLabel_setText (GuiLabel me, conststring32 text /* cattable */) {
 	#if gtk
 		gtk_label_set_text (GTK_LABEL (my d_widget), Melder_peek32to8 (Gui_tr (text)));
 	#elif motif
-		my d_widget -> name = Melder_dup_f (text);
+		my d_widget -> name = Melder_dup_f (Gui_tr (text));
 		_GuiNativeControl_setTitle (my d_widget);
 	#elif cocoa
 		[(NSTextField *) my d_widget setTitleWithMnemonic: (NSString *) Melder_peek32toCfstring (text)];

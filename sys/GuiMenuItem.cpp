@@ -466,7 +466,7 @@ void GuiMenuItem_setText (GuiMenuItem me, conststring32 text) {
 	#if gtk
 		gtk_label_set_label (GTK_LABEL (gtk_bin_get_child (GTK_BIN (my d_widget))), Melder_peek32to8 (Gui_tr (text)));
 	#elif motif
-		conststring8 text_utf8 = Melder_peek32to8 (text);
+		conststring8 text_utf8 = Melder_peek32to8 (Gui_tr (text));
 		XtVaSetValues (my d_widget, XmNlabelString, text_utf8, nullptr);
 	#elif cocoa
 		GuiCocoaMenuItem *item = (GuiCocoaMenuItem *) my d_widget;

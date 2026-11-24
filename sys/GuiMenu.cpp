@@ -408,10 +408,10 @@ GuiMenu GuiMenu_createInWindow (GuiWindow window, conststring32 title, uint32 fl
 		_GuiObject_setUserData (my d_widget, me.get());
 	#elif motif
 		Melder_assert (window);
-		my d_xmMenuTitle = XmCreateCascadeButton (window -> d_xmMenuBar, Melder_peek32to8 (title), nullptr, 0);
+		my d_xmMenuTitle = XmCreateCascadeButton (window -> d_xmMenuBar, Melder_peek32to8 (Gui_tr (title)), nullptr, 0);
 		if (str32equ (title, U"Help"))
 			XtVaSetValues (window -> d_xmMenuBar, XmNmenuHelpWidget, my d_xmMenuTitle, nullptr);
-		my d_widget = XmCreatePulldownMenu (window -> d_xmMenuBar, Melder_peek32to8 (title), nullptr, 0);
+		my d_widget = XmCreatePulldownMenu (window -> d_xmMenuBar, Melder_peek32to8 (Gui_tr (title)), nullptr, 0);
 		XtVaSetValues (my d_xmMenuTitle, XmNsubMenuId, my d_widget, nullptr);
 		XtManageChild (my d_xmMenuTitle);
 		if (flags & GuiMenu_INSENSITIVE)
@@ -526,8 +526,8 @@ GuiMenu GuiMenu_createInMenu (GuiMenu supermenu, conststring32 title, uint32 fla
 		gtk_widget_show (GTK_WIDGET (my d_menuItem -> d_widget));
 		_GuiObject_setUserData (my d_widget, me.get());
 	#elif motif
-		my d_menuItem -> d_widget = XmCreateCascadeButton (supermenu -> d_widget, Melder_peek32to8 (title), nullptr, 0);
-		my d_widget = XmCreatePulldownMenu (supermenu -> d_widget, Melder_peek32to8 (title), nullptr, 0);
+		my d_menuItem -> d_widget = XmCreateCascadeButton (supermenu -> d_widget, Melder_peek32to8 (Gui_tr (title)), nullptr, 0);
+		my d_widget = XmCreatePulldownMenu (supermenu -> d_widget, Melder_peek32to8 (Gui_tr (title)), nullptr, 0);
 		XtVaSetValues (my d_menuItem -> d_widget, XmNsubMenuId, my d_widget, nullptr);
 		XtManageChild (my d_menuItem -> d_widget);
 		if (flags & GuiMenu_INSENSITIVE)

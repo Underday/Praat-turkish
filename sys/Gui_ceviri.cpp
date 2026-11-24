@@ -11,6 +11,11 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
+#if defined (_WIN32)
+	#include <windows.h>
+#elif defined (linux)
+	#include <unistd.h>
+#endif
 
 namespace {
 
@@ -91,6 +96,45 @@ namespace {
 		sozluk [anahtar] = karsilik;
 	}
 
+	/*
+		Tercih klasöründe sözlük yoksa programın kendi klasörüne bakılır.
+		Böylece Windows'ta zip açılıp Praat.exe çalıştırıldığında kurulum gerekmez.
+	*/
+	bool programKlasorundekiDosya (MelderFile dosya) {
+		#if defined (_WIN32)
+			WCHAR yol [MAX_PATH + 1];
+			const DWORD uzunluk = GetModuleFileNameW (nullptr, yol, MAX_PATH);
+			if (uzunluk == 0 || uzunluk >= MAX_PATH)
+				return false;
+			std::u32string tam;
+			for (DWORD i = 0; i < uzunluk; i ++)
+				tam += (char32) yol [i];   // klasör adlarında BMP dışı karakter beklenmiyor
+		#elif defined (linux)
+			char yol [4096];
+			const ssize_t uzunluk = readlink ("/proc/self/exe", yol, sizeof yol - 1);
+			if (uzunluk <= 0)
+				return false;
+			yol [uzunluk] = '\0';
+			std::u32string tam;
+			try {
+				autostring32 yol32 = Melder_8to32_e (yol);
+				tam = yol32.get ();
+			} catch (MelderError) {
+				Melder_clearError ();
+				return false;
+			}
+		#else
+			return false;
+			std::u32string tam;
+		#endif
+		const size_t ayirici = tam.find_last_of (U"/\\");
+		if (ayirici == std::u32string::npos)
+			return false;
+		const std::u32string klasor = tam.substr (0, ayirici + 1) + U"ceviri_tr.tsv";
+		Melder_pathToFile (klasor.c_str (), dosya);
+		return MelderFile_exists (dosya);
+	}
+
 	void yukle () {
 		const conststring32 ortam = Melder_getenv (U"PRAAT_CEVIRI");
 		structMelderFile dosya { };
@@ -113,7 +157,7 @@ namespace {
 			return;
 		}
 		yuklendi = true;
-		if (! MelderFile_exists (& dosya)) {
+		if (! MelderFile_exists (& dosya) && ! (ortam && ortam [0] != U'\0') && ! programKlasorundekiDosya (& dosya)) {
 			kapali = true;
 			return;
 		}

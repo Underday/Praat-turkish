@@ -1,0 +1,50 @@
+# Praat Türkçe arayüz, Windows x64 derlemesi.
+# Yalnızca elle tetiklenir (Actions > Windows Türkçe derleme > Run workflow).
+# Private depoda her çalıştırma Windows dakikası harcar.
+name: Windows Türkçe derleme
+
+on:
+  workflow_dispatch:
+
+jobs:
+  windows-x64:
+    runs-on: windows-latest
+    timeout-minutes: 120
+    defaults:
+      run:
+        shell: msys2 {0}
+
+    steps:
+    - name: Depoyu al
+      uses: actions/checkout@v4
+
+    - name: MSYS2 (clang64) kur
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: CLANG64
+        update: true
+        install: >-
+          make
+          zip
+          mingw-w64-clang-x86_64-clang
+          mingw-w64-clang-x86_64-zlib
+
+    - name: Derle
+      run: make PRAAT_ARCH=x64v1 -j4
+
+    - name: Paketle
+      run: |
+        SURUM=$(grep -m1 'PRAAT_VERSION_STR' main/main_Praat.h | awk '{print $3}')
+        AD="Praat-tr-$SURUM-win-x64"
+        mkdir -p "dagitim/$AD"
+        cp Praat.exe ceviri/ceviri_tr.tsv ceviri/windows/BENIOKU.txt "dagitim/$AD/"
+        echo "AD=$AD" >> "$GITHUB_ENV"
+
+    - name: Sınama (script modunda açılış)
+      run: ./Praat.exe --version
+
+    - name: Yükle
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.AD }}
+        path: dagitim/${{ env.AD }}

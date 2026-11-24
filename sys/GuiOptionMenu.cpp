@@ -135,7 +135,7 @@ void GuiOptionMenu_addOption (GuiOptionMenu me, conststring32 text) {
 		gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (my d_widget), Melder_peek32to8 (Gui_tr (text)));
 	#elif motif
 		autoGuiMenuItem menuItem = Thing_new (GuiMenuItem);
-		menuItem -> d_widget = XtVaCreateManagedWidget (Melder_peek32to8 (text), xmToggleButtonWidgetClass, my d_widget, nullptr);
+		menuItem -> d_widget = XtVaCreateManagedWidget (Melder_peek32to8 (Gui_tr (text)), xmToggleButtonWidgetClass, my d_widget, nullptr);
 		XtAddCallback (menuItem -> d_widget, XmNvalueChangedCallback, cb_optionChanged, (XtPointer) me);
 		my d_options. addItem_move (menuItem.move());
 	#elif cocoa

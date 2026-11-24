@@ -339,7 +339,7 @@ GuiObject _Gui_initializeWidget (int widgetClass, GuiObject parent, conststring3
 	if (MEMBER2 (me, BulletinBoard, Form) && MEMBER (my parent, Shell))
 		my leftAttachment = my rightAttachment = my topAttachment = my bottomAttachment = XmATTACH_FORM;
 
-	if (MEMBER (me, CascadeButton) && str32equ (name, U"Help"))
+	if (MEMBER (me, CascadeButton) && (str32equ (name, U"Help") || str32equ (name, Gui_tr (U"Help"))))
 		my rightAttachment = XmATTACH_FORM;   /* !!!!!! */
 
 	/* A child of a scrolled window will be installed as the workWindow of that scrolled window,
@@ -575,7 +575,7 @@ static void _GuiNativizeWidget (GuiObject me) {
 				 * Insert the menu before the Help menu, if that exists; otherwise, at the end.
 				 */
 				for (menu = my parent -> firstChild; menu; menu = menu -> nextSibling) {
-					if (MEMBER (menu, PulldownMenu) && str32equ (menu -> name.get(), U"Help") && menu != me) {
+					if (MEMBER (menu, PulldownMenu) && (str32equ (menu -> name.get(), U"Help") || str32equ (menu -> name.get(), Gui_tr (U"Help"))) && menu != me) {
 						beforeID = (UINT) menu -> nat.menu./*handle*/id;
 						break;
 					}
@@ -584,7 +584,7 @@ static void _GuiNativizeWidget (GuiObject me) {
 					MENUITEMINFO info;
 					info. cbSize = sizeof (MENUITEMINFO);
 					info. fMask = MIIM_TYPE | MIIM_SUBMENU | MIIM_ID;
-					info. fType = MFT_STRING | ( str32equ (my name.get(), U"Help") ? MFT_RIGHTJUSTIFY : 0 );
+					info. fType = MFT_STRING | ( str32equ (my name.get(), U"Help") || str32equ (my name.get(), Gui_tr (U"Help")) ? MFT_RIGHTJUSTIFY : 0 );
 					info. dwTypeData = (mutablestringW) Melder_peek32toW (my name.get());
 					info. hSubMenu = my nat.menu.handle;
 					info. wID = (UINT) my nat.menu./*handle*/id;

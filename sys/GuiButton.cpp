@@ -165,7 +165,7 @@ GuiButton GuiButton_create (GuiForm parent, int left, int right, int top, int bo
 //			parent -> shell -> cancelButton = parent -> cancelButton = my widget;
 //		}
 	#elif motif
-		my d_widget = _Gui_initializeWidget (xmPushButtonWidgetClass, parent -> d_widget, buttonText);
+		my d_widget = _Gui_initializeWidget (xmPushButtonWidgetClass, parent -> d_widget, Gui_tr (buttonText));
 		_GuiObject_setUserData (my d_widget, me.get());
 		my d_widget -> window = CreateWindow (L"button", Melder_peek32toW (_GuiWin_expandAmpersands (my d_widget -> name.get())),
 			WS_CHILD
@@ -233,7 +233,7 @@ void GuiButton_setText (GuiButton me, conststring32 text /* cattable */) {
 	#if gtk
 		gtk_button_set_label (GTK_BUTTON (my d_widget), Melder_peek32to8 (Gui_tr (text)));
 	#elif motif
-		my d_widget -> name = Melder_dup_f (text);
+		my d_widget -> name = Melder_dup_f (Gui_tr (text));
 		_GuiNativeControl_setTitle (my d_widget);
 	#elif cocoa
 		[(NSButton *) my d_widget setTitle: (NSString *) Melder_peek32toCfstring (text)];

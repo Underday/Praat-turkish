@@ -172,7 +172,7 @@ void GuiShell_setTitle (GuiShell me, conststring32 title /* cattable */) {
 			}
 		#endif
 	#elif motif
-		SetWindowTextW (my d_xmShell -> window, Melder_peek32toW (title));
+		SetWindowTextW (my d_xmShell -> window, Melder_peek32toW (Gui_tr (title)));
 	#elif cocoa
 		[my d_cocoaShell   setTitle: (NSString *) Melder_peek32toCfstring (title)];
 	#endif

@@ -1,0 +1,21 @@
+Praat Türkçe arayüz (Windows)
+=============================
+
+Kurulum gerekmez.
+
+1. Zip dosyasını bir klasöre açın.
+2. Praat.exe dosyasını çalıştırın. Arayüz Türkçe açılır.
+
+Praat.exe ve ceviri_tr.tsv aynı klasörde durmalı. Sözlük dosyası silinirse Praat İngilizce açılır.
+
+İngilizceye geçmek için: Praat > Ayarlar > Arayüz dili... menüsünden "İngilizce" seçin,
+Praat'ı kapatıp yeniden açın. Türkçeye dönmek için İngilizce arayüzde
+Praat > Settings > Interface language... menüsünden "Turkish" seçin.
+
+Program imzasız olduğu için Windows ilk açılışta "Windows bilgisayarınızı korudu"
+uyarısı verebilir. "Ek bilgi" bağlantısına, sonra "Yine de çalıştır" düğmesine tıklayın.
+
+Scriptler İngilizce komut adlarıyla çalışmaya devam eder.
+Terimler ve ayrıntılar için: https://github.com/Underday/Praat-turkish (README_TR.md, TERIMLER.md)
+
+Praat: Paul Boersma ve David Weenink, https://www.praat.org (GPL lisansı).
