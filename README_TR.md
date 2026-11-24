@@ -44,7 +44,7 @@ Zip'i açıp `Praat.exe` dosyasını çalıştırmak yeterli, kurulum gerekmez. 
 Zip iki yoldan üretilebilir:
 
 - Linux'ta: `ceviri/windows/derle.sh` (Arch'ta `mingw-w64-gcc` paketi gerekir). Çıktı `../praat-win/dagitim/` altına yazılır.
-- GitHub Actions'ta: `windows-` ile başlayan bir etiket push edilince `.github/workflows/windows-turkce.yml` çalışır, zip iş akışının "Artifacts" bölümünden indirilir.
+- GitHub Actions'ta: `windows-` ile başlayan bir etiket push edilince `.github/workflows/windows-turkce.yml` çalışır (MSYS2 UCRT64, yaklaşık 20 dakika), zip iş akışının "Artifacts" bölümünden indirilir. Örnek: `git tag windows-v0.5 && git push origin windows-v0.5`.
 
 Windows sürümü şimdiye kadar yalnızca Wine altında denendi.
 
