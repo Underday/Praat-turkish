@@ -1,0 +1,128 @@
+# Praat Türkçe sürümü: Windows ve Linux paketlerini derler, sınar ve GitHub Release olarak yayımlar.
+# Yeni sürüm: sys/praat_ceviri.cpp içindeki CEVIRI_SURUM değerini artırın, sonra aynı sürümle etiket push edin:
+#   git tag tr-v0.2 && git push origin tr-v0.2
+# Elle tetiklenirse (Actions > Sürüm > Run workflow) paketler yalnızca derlenir, Release açılmaz.
+name: Sürüm
+
+on:
+  push:
+    tags: [ "tr-v*" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  surum:
+    runs-on: ubuntu-latest
+    outputs:
+      surum: ${{ steps.oku.outputs.surum }}
+      praat: ${{ steps.oku.outputs.praat }}
+    steps:
+    - uses: actions/checkout@v4
+    - id: oku
+      name: Sürümleri oku ve etiketle karşılaştır
+      run: |
+        SURUM=$(grep -m1 '#define CEVIRI_SURUM' sys/praat_ceviri.cpp | sed 's/.*U"\(.*\)".*/\1/')
+        PRAAT=$(grep -m1 'PRAAT_VERSION_STR' main/main_Praat.h | awk '{print $3}')
+        echo "surum=$SURUM" >> "$GITHUB_OUTPUT"
+        echo "praat=$PRAAT" >> "$GITHUB_OUTPUT"
+        if [ "${GITHUB_REF_TYPE}" = "tag" ] && [ "${GITHUB_REF_NAME}" != "tr-v$SURUM" ]; then
+          echo "Etiket ${GITHUB_REF_NAME}, koddaki sürüm $SURUM (beklenen etiket tr-v$SURUM)."
+          exit 1
+        fi
+
+  windows:
+    needs: surum
+    runs-on: windows-latest
+    timeout-minutes: 120
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+    - uses: actions/checkout@v4
+    # UCRT64: GCC ve libstdc++. CLANG64 (libc++) ile Praat'ın bazı dosyaları <vector> başlığını dolaylı bulamıyor.
+    - uses: msys2/setup-msys2@v2
+      with:
+        msystem: UCRT64
+        update: true
+        install: >-
+          make
+          zip
+          mingw-w64-ucrt-x86_64-gcc
+          mingw-w64-ucrt-x86_64-zlib
+    - name: Derle
+      # MinGW'nin kendi printf/scanf sürümü: Praat açılışta %td biçimini denetler.
+      run: make PRAAT_COMPILER=gcc PRAAT_ARCH=x64v1 CC="gcc -D__USE_MINGW_ANSI_STDIO=1" CXX="g++ -D__USE_MINGW_ANSI_STDIO=1" -j4
+    - name: Sına (script modunda açılış)
+      run: |
+        printf 'writeInfoLine: 2 + 2\n' > sinama.praat
+        ./Praat.exe --run sinama.praat | tee sinama.txt
+        grep -q 4 sinama.txt
+    - name: Paketle
+      run: |
+        AD="Praat-tr-${{ needs.surum.outputs.surum }}-win-x64"
+        mkdir -p "dagitim/$AD"
+        strip Praat.exe
+        cp Praat.exe ceviri/ceviri_tr.tsv ceviri/windows/BENIOKU.txt ceviri/windows/kur.bat "dagitim/$AD/"
+        cp -r ceviri/plugin_TurkceAraclar "dagitim/$AD/"
+        (cd dagitim && zip -qr "$AD.zip" "$AD")
+    - uses: actions/upload-artifact@v4
+      with:
+        name: windows
+        path: dagitim/*.zip
+
+  linux:
+    needs: surum
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v4
+    - name: Gerekenler
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y make pkg-config gcc g++ libgtk-3-dev libasound2-dev libpulse-dev libjack-dev xvfb
+    - name: Derle
+      run: make -j4
+    - name: Sına (script modunda açılış)
+      run: |
+        printf 'writeInfoLine: 2 + 2\n' > sinama.praat
+        xvfb-run -a ./praat --run sinama.praat | tee sinama.txt
+        grep -q 4 sinama.txt
+    - name: Paketle
+      run: |
+        AD="Praat-tr-${{ needs.surum.outputs.surum }}-linux-x86_64"
+        mkdir -p "dagitim/$AD"
+        strip praat
+        cp praat ceviri/ceviri_tr.tsv ceviri/linux/BENIOKU.txt ceviri/linux/kur.sh "dagitim/$AD/"
+        cp -r ceviri/plugin_TurkceAraclar "dagitim/$AD/"
+        (cd dagitim && tar -czf "$AD.tar.gz" "$AD")
+    - uses: actions/upload-artifact@v4
+      with:
+        name: linux
+        path: dagitim/*.tar.gz
+
+  release:
+    if: github.ref_type == 'tag'
+    needs: [surum, windows, linux]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        path: paketler
+        merge-multiple: true
+    - name: Release aç
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        cat > notlar.md <<NOT
+        Praat ${{ needs.surum.outputs.praat }} üzerine Türkçe arayüz, sürüm ${{ needs.surum.outputs.surum }}.
+
+        - Windows: zip'i açıp Praat.exe dosyasını çalıştırın. Türkçe araçlar eklentisi için kur.bat.
+        - Linux (x86_64): arşivi açıp ./praat çalıştırın. Eklenti için ./kur.sh.
+
+        Ayrıntılar: README_TR.md
+        NOT
+        gh release create "${GITHUB_REF_NAME}" paketler/* \
+          --repo "${GITHUB_REPOSITORY}" \
+          --title "Praat Türkçe ${{ needs.surum.outputs.surum }}" \
+          --notes-file notlar.md

@@ -2,6 +2,8 @@
 
 Bu depo, Praat'ın (konuşma analizi ve fonetik programı, https://praat.org) arayüzünü Türkçeye çevirmek için tutuluyor. Praat'ın kendi kaynak koduna çok küçük bir çeviri katmanı ekleniyor, çeviriler tek bir sözlük dosyasında duruyor.
 
+**İndirme:** hazır Windows ve Linux paketleri [Releases](https://github.com/Underday/Praat-turkish/releases/latest) sayfasında.
+
 ![Nesneler penceresi](ceviri/ekran/nesneler-penceresi.png)
 ![TextGrid düzenleyici](ceviri/ekran/textgrid-duzenleyici.png)
 ![Periyodiklik analizi menüsü](ceviri/ekran/periyodiklik-menusu.png)
@@ -16,12 +18,13 @@ Bu depo, Praat'ın (konuşma analizi ve fonetik programı, https://praat.org) ar
 - Komutların iç adları değişmiyor. Praat scriptleri (`To Pitch...`, `selectObject: ...`) Türkçe arayüzde de aynen çalışır. "Paste history" İngilizce komut adlarını verir.
 - Praat varsayılan olarak Türkçe açılır. İngilizceye geçmek için **Praat > Ayarlar > Arayüz dili...** menüsünden "İngilizce" seçilir, değişiklik Praat yeniden açılınca geçerli olur. İngilizce arayüzde aynı komut "Praat > Settings > Interface language..." adıyla durur, Türkçeye dönmek için oradan "Turkish" seçilir. Seçim `~/.config/praat/ceviri_ayar.txt` dosyasında tutulur. Scriptten de değiştirilebilir: `Interface language: "English"`.
 - Praat açılınca küçük bir pencere çeviriyi yapanı, çeviri sürümünü ve depoda yeni sürüm olup olmadığını gösterir. Denetim `curl` ile GitHub'daki son Release etiketine bakar (Linux ve macOS'ta, Windows 10 ve sonrasında `curl` hazır gelir). En fazla 4 saniye bekler. Bağlantı yoksa "Güncelleme denetlenemedi" yazar. "Yeni sürüm çıkana dek gösterme" seçilirse pencere yalnızca daha yeni bir sürüm çıkınca yeniden görünür. Script modunda (`--run`) pencere çıkmaz, `PRAAT_CEVIRI_ACILIS=0` ile tamamen kapatılır.
-- Yeni sürüm yayımlamak için `sys/praat_ceviri.cpp` içindeki `CEVIRI_SURUM` artırılır, sonra depoda `tr-v0.2` gibi bir etiketle GitHub Release açılır. Depo private olduğu sürece denetim çalışmaz, çünkü GitHub giriş yapılmadan private depoyu göstermez.
 - Sözlük dosyası kurulu değilse Praat tamamen İngilizce açılır. Tek bir açılış için çeviriyi kapatmak isterseniz `PRAAT_CEVIRI=0 ./praat` yeterli.
 
 Upstream koduna dokunulan yerler: `sys/` altındaki 10 Gui dosyasında `Melder_peek32to8 (x)` çağrıları `Melder_peek32to8 (Gui_tr (x))` hâline getirildi, `GuiP.h` bir satır `#include` aldı, `sys/Makefile` ve `sys/meson.build` yeni dosyayı tanıdı. Bu değişiklikler küçük olduğu için upstream güncellemeleri birleştirilirken çakışma riski düşük.
 
 ## Kurulum (Linux)
+
+Hazır paket: [Releases](https://github.com/Underday/Praat-turkish/releases/latest) sayfasındaki `linux-x86_64.tar.gz` arşivi açılıp `./praat` çalıştırılır, eklenti için `./kur.sh`. Kaynaktan derlemek için:
 
 Gerekenler (Arch): `gtk3`, `libpulse`, `alsa-lib`, `jack2` (ya da `pipewire-jack`), `gcc`, `make`, `pkgconf`.
 Ubuntu ya da Debian için `HOW_TO_BUILD_ONE.md` dosyasındaki paket listesine bakın.
@@ -46,9 +49,17 @@ Zip'i açıp `Praat.exe` dosyasını çalıştırmak yeterli, kurulum gerekmez. 
 Zip iki yoldan üretilebilir:
 
 - Linux'ta: `ceviri/windows/derle.sh` (Arch'ta `mingw-w64-gcc` paketi gerekir). Çıktı `../praat-win/dagitim/` altına yazılır.
-- GitHub Actions'ta: `windows-` ile başlayan bir etiket push edilince `.github/workflows/windows-turkce.yml` çalışır (MSYS2 UCRT64, yaklaşık 20 dakika), zip iş akışının "Artifacts" bölümünden indirilir. Örnek: `git tag windows-v0.5 && git push origin windows-v0.5`.
+- GitHub Actions'ta: sürüm iş akışı (`.github/workflows/surum.yml`, aşağıdaki "Sürüm yayımlama" bölümü).
 
 Windows sürümü şimdiye kadar yalnızca Wine altında denendi.
+
+## Sürüm yayımlama
+
+1. `sys/praat_ceviri.cpp` içindeki `CEVIRI_SURUM` değeri artırılır (örnek: `0.2`) ve commit edilir.
+2. Aynı sürümle etiket push edilir: `git tag tr-v0.2 && git push origin tr-v0.2`.
+3. `.github/workflows/surum.yml` Windows (MSYS2 UCRT64) ve Linux (Ubuntu 22.04) paketlerini derler, script modunda sınar ve "Praat Türkçe 0.2" adıyla bir GitHub Release açar. Etiket koddaki sürümle tutmazsa iş akışı durur.
+
+Praat'taki açılış penceresi en son Release etiketine bakar. Kullanıcılar yeni sürümü buradan öğrenir.
 
 ## Çeviriye katkı
 
