@@ -31,11 +31,11 @@ git clone https://github.com/Underday/Praat-turkish.git
 cd Praat-turkish
 git checkout turkce
 make -j$(nproc)          # ./praat dosyası oluşur
-ceviri/kur.sh            # sözlüğü ~/.config/praat/ceviri_tr.tsv olarak bağlar
+ceviri/kur.sh            # sözlüğü ve Türkçe araçlar eklentisini ~/.config/praat altına bağlar
 ./praat
 ```
 
-`ceviri/kur.sh --kaldir` sözlüğü kaldırır, Praat yeniden İngilizce açılır. Sözlük başka bir yerdeyse `PRAAT_CEVIRI=/yol/ceviri_tr.tsv ./praat` ile verilebilir.
+`ceviri/kur.sh --kaldir` sözlüğü ve eklentiyi kaldırır, Praat yeniden İngilizce açılır. Sözlük başka bir yerdeyse `PRAAT_CEVIRI=/yol/ceviri_tr.tsv ./praat` ile verilebilir.
 
 ## Windows
 
@@ -66,6 +66,30 @@ Windows sürümü şimdiye kadar yalnızca Wine altında denendi.
    - Nesne adları (Sound, TextGrid, Pitch, Intensity, Formant...) İngilizce kalır.
 4. Praat'ı yeniden açmak yeterli, derleme gerekmez.
 
+## Türkçe araçlar eklentisi
+
+`ceviri/plugin_TurkceAraclar` klasöründe, Praat 7'nin kendi komutlarıyla yazılmış bir script paketi var. Linux'ta `kur.sh` kurar. Windows'ta zip'teki `kur.bat` eklentiyi `%APPDATA%\Praat` klasörüne kopyalar. Komutlar menülerde "⁺Türkçe araçlar" altında çıkar. Başlarındaki "⁺" işaretini Praat 7 kendisi koyuyor, eklentiyle gelen komutları böyle ayırt ediyor.
+
+| Nerede | Komut | Ne yapar |
+|---|---|---|
+| Sound seçiliyken | Ses kalitesi raporu | Perde istatistikleri, jitter, shimmer, HNR, CPPS. İsteğe bağlı CSV |
+| Sound seçiliyken | Spektral eğim ölçüleri | H1-H2, H1-A1, H1-A3 (düzeltilmemiş), LTAS eğimi, alfa oranı |
+| Sound ve TextGrid | Etiketli aralıkları ölç | Her etiketli aralık için süre, perde, şiddet, orta noktada F1 F2 F3, spektral momentler (CSV) |
+| Sound ve TextGrid | Ünlü grafiği (F1-F2) | Etiketli ünlüleri Çizim penceresinde F1-F2 düzleminde çizer |
+| Sound ve TextGrid | Etiketli aralıkları WAV olarak kaydet | Her etiketli aralığı ayrı dosyaya böler |
+| Yeni menüsü | Klasörün ses kalitesi | Bir klasördeki bütün .wav dosyaları için ses kalitesi tablosu |
+| Yeni menüsü | Klasörü ölç | Aynı adlı TextGrid varsa etiketli aralıklar, yoksa dosyanın tamamı |
+| Yeni menüsü | Klasörün duraklama analizi | Sessizlik ve konuşma bölümleri, duraklama sayısı ve süresi, konuşma oranı |
+| Yeni menüsü | Klasörü dönüştür | Tek kanala indirme, yeniden örnekleme, bant geçiren süzgeç, düzey ayarı |
+
+![Ses kalitesi raporu](ceviri/ekran/eklenti-ses-kalitesi.png)
+
+- Jitter, shimmer ve HNR, Praat'ın Voice report çıktısından okunur, yani ses raporuyla birebir aynıdır. Pitch "raw cross-correlation" yöntemiyle hesaplanır (Praat kılavuzunun ses analizi önerisi).
+- Normatif eşik gösterilmez. Değerlerin yorumu kullanıcıya bırakıldı.
+- Ses kalitesi raporu seçili Sound'un tamamını ölçer. Uzatılmış ünlü ölçülecekse önce o bölüm ayrı bir Sound olarak çıkarılmalı.
+- Praat 7 eklenti scriptlerini tam güvenilir saymaz. Dosya yazan bir komut (CSV, WAV, TextGrid kaydı) ilk çalıştırmada onay ister. "Bu scripte bundan sonra güveniyorum" seçeneği o oturum için yeniden sormayı kaldırır. CSV alanı boş bırakılırsa tek ses komutları hiç sormaz.
+- Komut ve form adlarının iç adları İngilizcedir. Arayüz dili İngilizce seçilirse eklenti de İngilizce görünür.
+
 ## Benzer çalışma: Özelleştirilmiş Praat (Kılıç, 2014)
 
 Kılıç'ın "Klinik Fonetik ve Ağız Araştırmaları İçin Özelleştirilmiş Praat Programı" paketi (Praat.ozel 3.1) Praat 5.3.57 üzerine kurulu bir eklenti ve ayar paketidir. Nesneler penceresine Türkçe adlı düğmeler ekler (ses kalitesi ölçümü, CPP, VoiceSauce, toplu formant, perde ve spektral moment ölçümü), IPA yazımı için Lenz programını ve fontları, örnek ses ve TextGrid dosyalarını birlikte dağıtır.
@@ -80,9 +104,9 @@ Bu depo ondan şu noktalarda ayrılıyor:
 | Praat sürümü | 5.3.57'ye bağlı, paket başka bir sürümle eklentilerin çalışmayabileceğini belirtiyor | Güncel sürüm (7.0.03), upstream güncellemeleri birleştirilebiliyor |
 | Kurulum | Ayar dosyalarını elle kopyalama | Tek sözlük dosyası ve `kur.sh` |
 | Terimler | Belgelenmemiş | `TERIMLER.md` ile gerekçeli |
-| Platform | Windows ve macOS | Şimdilik Linux |
+| Platform | Windows ve macOS | Linux ve Windows (Wine altında denendi) |
 
-İki iş birbirini tamamlıyor. Bu depo arayüzü çeviriyor, Praat.ozel ise klinik ölçümler için hazır araçlar sunuyor. Klinik kısayollar ileride ayrı bir eklenti (plugin) olarak eklenebilir.
+Klinik ölçüm araçları için bu depoda da bir eklenti var (yukarıdaki "Türkçe araçlar eklentisi"). Praat.ozel'in scriptleri kopyalanmadı, araçlar Praat 7 komutlarıyla yeniden yazıldı.
 
 Kaynak: Kılıç, M. A. (2014). Özelleştirilmiş Praat programı ile uygulama. Konuşma ve Dil Bozukluklarını Anlamak: Klinik Fonetik ve Dilbilim Kursu (27-31 Ocak 2014), İstanbul.
 
@@ -92,6 +116,7 @@ Kaynak: Kılıç, M. A. (2014). Özelleştirilmiş Praat programı ile uygulama.
 - Bilgi penceresi yalnızca ekranda çevriliyor. Scriptlerin `info$ ()` ile okuduğu metin İngilizce kalıyor, ancak Bilgi penceresinden kopyalanan ya da "Farklı kaydet" ile kaydedilen metin Türkçe olur. Kendi scriptinizin yazdırdığı satırlar da sözlükteki bir etiketle başlıyorsa Türkçe görünür. Bilgi penceresi çevirisini kapatmak için `PRAAT_CEVIRI_BILGI=0 ./praat`.
 - Düzenleyicinin çizim alanında açıklamalar ("türetilmiş spektrogram") ve süre çubukları çevriliyor. Eksen yazıları, Çizim penceresine çizilen yazılar, hata mesajları ve kılavuz sayfaları çevrilmiyor.
 - Linux'ta ve Windows'ta (Wine altında) denendi. macOS tarafı henüz bağlanmadı.
+- Praat'ın güven onayı penceresinin metinleri çok satırlı olduğu için çevrilmiyor.
 
 ## Lisans
 

@@ -421,6 +421,19 @@ conststring32 Gui_tr (conststring32 english) {
 		return english;
 	}
 	/*
+		Eklentilerin ya da kullanıcının eklediği komutlar Praat 7'de "⁺" işaretiyle başlar.
+		İşaret korunur, sözlükte işaretsiz biçim aranır.
+	*/
+	if (anahtar [0] == U'⁺' && anahtar.size () > 1) {
+		const conststring32 ic = Gui_tr (english + 1);
+		if (ic != english + 1) {
+			auto& yeni = sozluk [anahtar];
+			yeni = std::u32string (1, U'⁺') + ic;
+			return yeni.c_str ();
+		}
+		return english;
+	}
+	/*
 		Diyalog başlıkları "Sound: To Intensity" biçimindedir.
 		Nesne türü (iki noktadan önceki kısım) korunur, komut adı çevrilir.
 	*/

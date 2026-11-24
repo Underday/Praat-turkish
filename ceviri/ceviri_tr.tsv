@@ -1616,3 +1616,93 @@ Speckle separately (erb)...	Ayrı benekle çiz (ERB)...
 Replace pitch tier	Perde katmanını değiştir
 Replace duration tier	Süre katmanını değiştir
 Replace original sound	Özgün sesi değiştir
+
+# Türkçe araçlar eklentisi (ceviri/plugin_TurkceAraclar)
+## Menü komutları
+Turkish tools -	Türkçe araçlar -
+Turkish tools	Türkçe araçlar
+Voice quality report...	Ses kalitesi raporu...
+Spectral tilt measures...	Spektral eğim ölçüleri...
+Measure labelled intervals...	Etiketli aralıkları ölç...
+Vowel chart (F1-F2)...	Ünlü grafiği (F1-F2)...
+Save labelled intervals as WAV files...	Etiketli aralıkları WAV olarak kaydet...
+Voice quality of folder...	Klasörün ses kalitesi...
+Measure folder...	Klasörü ölç...
+Pause analysis of folder...	Klasörün duraklama analizi...
+Convert folder...	Klasörü dönüştür...
+## Diyalog başlıkları ve alanlar
+Voice quality report	Ses kalitesi raporu
+Spectral tilt measures	Spektral eğim ölçüleri
+Measure labelled intervals	Etiketli aralıkları ölç
+Vowel chart (F1-F2)	Ünlü grafiği (F1-F2)
+Save labelled intervals as WAV files	Etiketli aralıkları WAV olarak kaydet
+Voice quality of folder	Klasörün ses kalitesi
+Measure folder	Klasörü ölç
+Pause analysis of folder	Klasörün duraklama analizi
+Convert folder	Klasörü dönüştür
+Maximum formant (Hz)	En yüksek formant (Hz)
+Number of measurement points	Ölçüm noktası sayısı
+Csv file (optional)	CSV dosyası (isteğe bağlı)
+Csv file	CSV dosyası
+Folder	Klasör
+Input folder	Kaynak klasör
+Output folder	Hedef klasör
+New sampling frequency (Hz, 0 = keep)	Yeni örnekleme frekansı (Hz, 0 = aynı kalsın)
+Low cutoff frequency (Hz, 0 = none)	Alt kesim frekansı (Hz, 0 = yok)
+High cutoff frequency (Hz, 0 = none)	Üst kesim frekansı (Hz, 0 = yok)
+Normalization	Düzey ayarı
+none	yok
+peak 0.99	tepe 0.99
+average intensity 70 dB	ortalama şiddet 70 dB
+Silence threshold (dB)	Sessizlik eşiği (dB)
+Minimum pause duration (s)	En kısa duraklama (s)
+Minimum sounding duration (s)	En kısa sesli bölüm (s)
+Save TextGrids	TextGrid'leri kaydet
+Margin (s)	Pay (s)
+F1 maximum (Hz)	F1 üst sınırı (Hz)
+F2 maximum (Hz)	F2 üst sınırı (Hz)
+Erase first	Önce temizle
+Folder with sound files	Ses dosyalarının klasörü
+Folder for the converted files	Dönüştürülen dosyaların klasörü
+Folder for the WAV files	WAV dosyalarının klasörü
+## Bilgi penceresi
+Duration	Süre
+CPPS	CPPS
+H1-H2	H1-H2
+H1-A1	H1-A1
+H1-A3	H1-A3
+LTAS slope (0-1 kHz vs 1-10 kHz)	LTAS eğimi (0-1 kHz ile 1-10 kHz)
+Alpha ratio (50-1000 Hz vs 1-5 kHz)	Alfa oranı (50-1000 Hz ile 1-5 kHz)
+(H1-H2, H1-A1 and H1-A3 are uncorrected for formant frequencies and bandwidths)	(H1-H2, H1-A1 ve H1-A3 formant frekansı ve bant genişliği için düzeltilmemiştir)
+Number of intervals	Aralık sayısı
+Number of files	Dosya sayısı
+CSV file	CSV dosyası
+Number of pauses	Duraklama sayısı
+Pause time	Duraklama süresi
+The output folder must differ from the input folder.	Hedef klasör kaynak klasörden farklı olmalı.
+## Praat'ın komut ekleme diyalogları (eklentiler açılışta bunları kullanır)
+Add action command	Eylem komutu ekle
+Add menu command	Menü komutu ekle
+Class 1:	Sınıf 1:
+Number 1:	Sayı 1:
+Class 2:	Sınıf 2:
+Number 2:	Sayı 2:
+Class 3:	Sınıf 3:
+Number 3:	Sayı 3:
+Command:	Komut:
+After command:	Şu komuttan sonra:
+Depth:	Derinlik:
+Script file:	Script dosyası:
+Browse...	Gözat...
+Window:	Pencere:
+Menu:	Menü:
+## Eklenti form başlıkları ("Run script: ..." biçimi)
+Run script: Voice quality report	Script çalıştır: Ses kalitesi raporu
+Run script: Spectral tilt measures	Script çalıştır: Spektral eğim ölçüleri
+Run script: Measure labelled intervals	Script çalıştır: Etiketli aralıkları ölç
+Run script: Vowel chart (F1-F2)	Script çalıştır: Ünlü grafiği (F1-F2)
+Run script: Save labelled intervals as WAV files	Script çalıştır: Etiketli aralıkları WAV olarak kaydet
+Run script: Voice quality of folder	Script çalıştır: Klasörün ses kalitesi
+Run script: Measure folder	Script çalıştır: Klasörü ölç
+Run script: Pause analysis of folder	Script çalıştır: Klasörün duraklama analizi
+Run script: Convert folder	Script çalıştır: Klasörü dönüştür
