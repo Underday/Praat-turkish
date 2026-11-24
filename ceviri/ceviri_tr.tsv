@@ -687,3 +687,148 @@ Get points (followed)...	Noktaları al (ardından)...
 Merge...	Birleştir...
 To DurationTier...	DurationTier oluştur...
 Shift times to between zero and physical duration	Zamanları sıfır ile fiziksel süre arasına kaydır
+
+## Düzenleyici çizim alanı (açıklamalar ve süre çubukları)
+non-modifiable copy of sound	sesin değiştirilemez kopyası
+non-modifiable mono copy of sound	sesin değiştirilemez tek kanallı kopyası
+non-modifiable copy of TextGrid	TextGrid'in değiştirilemez kopyası
+modifiable sound	değiştirilebilir ses
+modifiable TextGrid	değiştirilebilir TextGrid
+derived spectrogram	türetilmiş spektrogram
+derived formants	türetilmiş formantlar
+derived intensity	türetilmiş şiddet
+derived pitch	türetilmiş perde
+derived pulses	türetilmiş titreşim noktaları
+pitch derived from pulses	titreşim noktalarından türetilmiş perde
+Total duration %f seconds	Toplam süre %f saniye
+Visible part %f seconds	Görünen bölüm %f saniye
+
+## Ses kayıt penceresi (SoundRecorder)
+SoundRecorder	Ses kaydedici
+SoundRecorder help	Ses kaydedici yardımı
+Input source:	Giriş kaynağı:
+Meter	Gösterge
+Sampling frequency:	Örnekleme frekansı:
+Channels:	Kanallar:
+Mono	Tek kanal
+Stereo	Stereo
+Microphone	Mikrofon
+Line	Hat girişi
+Record	Kayıt
+Stop	Durdur
+Name:	Ad:
+Save to list	Listeye al
+Save to list & Close	Al ve kapat
+Not recording.	Kayıt yapılmıyor.
+Centre of gravity ~ intensity	Ağırlık merkezi ~ şiddet
+Save as WAV file	WAV dosyası olarak kaydet
+Save as AIFC file	AIFC dosyası olarak kaydet
+Save as NIST file	NIST dosyası olarak kaydet
+Save as NeXT/Sun file	NeXT/Sun dosyası olarak kaydet
+
+## Bilgi penceresi (yalnızca ekranda çevrilir, info$ () İngilizce kalır)
+Praat Info	Praat Bilgi
+Search	Ara
+Convert	Dönüştür
+# Ses raporu (Voice report)
+~-- Voice report for * --	-- * için ses raporu --
+Date	Tarih
+~Time range of *	* zaman aralığı
+~From * to * seconds (duration: * seconds)	* ile * saniye arası (süre: * saniye)
+@SELECTION	SEÇİMİN
+@WINDOW	PENCERENİN
+@CURSOR	İMLECİN
+@seconds	saniye
+Pitch:	Perde (F0):
+Pulses:	Titreşim noktaları (pulses):
+Voicing:	Ötümlülük:
+Jitter:	Jitter (frekans düzensizliği):
+Shimmer:	Shimmer (genlik düzensizliği):
+Harmonicity of the voiced parts only:	Yalnızca ötümlü bölümlerin harmonikliği:
+H1-minus-H2:	H1 eksi H2:
+Median pitch	Medyan perde
+Mean pitch	Ortalama perde
+Standard deviation	Standart sapma
+Minimum pitch	En düşük perde
+Maximum pitch	En yüksek perde
+Number of pulses	Titreşim noktası sayısı
+Number of periods	Periyot sayısı
+Mean period	Ortalama periyot
+Standard deviation of period	Periyodun standart sapması
+Fraction of locally unvoiced frames	Yerel olarak ötümsüz çerçeve oranı
+Number of voice breaks	Ses kırılması sayısı
+Degree of voice breaks	Ses kırılması derecesi
+Jitter (local)	Jitter (yerel)
+Jitter (local, absolute)	Jitter (yerel, mutlak)
+Jitter (rap)	Jitter (rap)
+Jitter (ppq5)	Jitter (ppq5)
+Jitter (ddp)	Jitter (ddp)
+Shimmer (local)	Shimmer (yerel)
+Shimmer (local, dB)	Shimmer (yerel, dB)
+Shimmer (apq3)	Shimmer (apq3)
+Shimmer (apq5)	Shimmer (apq5)
+Shimmer (apq11)	Shimmer (apq11)
+Shimmer (dda)	Shimmer (dda)
+Mean autocorrelation	Ortalama otokorelasyon
+Mean noise-to-harmonics ratio	Ortalama gürültü/harmonik oranı (NHR)
+Mean harmonics-to-noise ratio	Ortalama harmonik/gürültü oranı (HNR)
+Mean of the points	Noktaların ortalaması
+Mean of the curve	Eğrinin ortalaması
+WARNING: several of the following measurements, especially those on harmonicity, will be incorrect,	UYARI: aşağıdaki ölçümlerin bazıları, özellikle harmoniklik ölçümleri yanlış olacak,
+WARNING: several of the above measurements, especially those on harmonicity, will be incorrect,	UYARI: yukarıdaki ölçümlerin bazıları, özellikle harmoniklik ölçümleri yanlış olacak,
+because they are based on a sound from which higher frequencies have been filtered out.	çünkü yüksek frekansları süzülmüş bir sese dayanıyorlar.
+For more correctness, go to “Pitch settings” and choose	Daha doğru sonuç için “Perde ayarları” bölümüne gidin ve
+For more precision, go to “Pitch settings” and choose	Daha duyarlı sonuç için “Perde ayarları” bölümüne gidin ve
+the raw cross-correlation analysis method to optimize for voice research.	ses araştırması için uygun olan ham çapraz korelasyon yöntemini seçin.
+WARNING: some of the following measurements may be imprecise.	UYARI: aşağıdaki ölçümlerin bazıları duyarsız olabilir.
+WARNING: some of the above measurements may be imprecise.	UYARI: yukarıdaki ölçümlerin bazıları duyarsız olabilir.
+# Sound bilgisi (Info düğmesi) ve sorgu çıktıları
+Object type	Nesne türü
+Object name	Nesne adı
+Number of channels	Kanal sayısı
+Time domain:	Zaman aralığı:
+Start time	Başlangıç zamanı
+End time	Bitiş zamanı
+Total duration	Toplam süre
+Time sampling:	Zaman örneklemesi:
+Number of samples	Örnek sayısı
+Sampling period	Örnekleme periyodu
+Sampling frequency	Örnekleme frekansı
+First sample centred at	İlk örneğin merkezi
+Amplitude:	Genlik:
+Minimum	En küçük
+Maximum	En büyük
+Mean	Ortalama
+Root-mean-square	Karekök ortalama kare (RMS)
+Energy:	Enerji:
+Power:	Güç:
+@samples	örnek
+@mono	tek kanal
+@stereo	stereo
+SoundRecorder (mono)	Ses kaydedici (tek kanal)
+SoundRecorder (stereo)	Ses kaydedici (stereo)
+
+## Bilgi ve script penceresi menüleri
+Clear	Temizle
+Save as...	Farklı kaydet...
+Redo	Yinele
+Copy	Kopyala
+Paste	Yapıştır
+Erase	Sil
+Shift right	Sağa kaydır
+Shift left	Sola kaydır
+Replace...	Değiştir...
+Replace again	Yeniden değiştir
+Use selection for find	Seçimi aramada kullan
+Where am I?	Neredeyim?
+Go to line...	Satıra git...
+Convert to C string	C dizgesine dönüştür
+Start of selection (s)	Seçimin başlangıcı (s)
+End of selection (s)	Seçimin sonu (s)
+Extract -	Çıkar -
+Extract all intervals...	Bütün aralıkları çıkar...
+Extract non-empty intervals...	Boş olmayan aralıkları çıkar...
+Extract intervals where...	Koşula uyan aralıkları çıkar...
+Scale times	Zamanları ölçekle
+Modify Sound	Sound'u değiştir
+Clone time domain	Zaman aralığını kopyala

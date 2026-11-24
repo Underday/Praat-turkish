@@ -58,6 +58,7 @@ constexpr bool theCommandKeyIsToTheLeftOfTheOptionKey =
 	#endif
 
 #include "Collection.h"
+#include "Gui_ceviri.h"
 
 #if defined (UNIX)
 	#if gtk

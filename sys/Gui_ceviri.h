@@ -24,5 +24,23 @@
 
 conststring32 Gui_tr (conststring32 english);
 
+/*
+	Düzenleyicilerin çizim alanındaki açıklamalar ("~ %%non-modifiable copy of sound").
+	"%%" ya da "##" işaretinden sonraki ad çevrilir, simge korunur.
+*/
+conststring32 Gui_trLejant (conststring32 lejant);
+
+/*
+	printf biçim dizgeleri ("Total duration %f seconds"). Karşılıktaki % sayısı aynı olmalı.
+*/
+const char *Gui_trBicim (const char *bicim);
+
+/*
+	Bilgi penceresinde görünen metin. Yalnızca ekrana giden kopya çevrilir,
+	scriptlerin info$ () ile okuduğu metin İngilizce kalır.
+	PRAAT_CEVIRI_BILGI=0 ile kapatılabilir.
+*/
+conststring32 Gui_trMetin (conststring32 metin);
+
 #endif
 /* End of file Gui_ceviri.h */

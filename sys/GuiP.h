@@ -19,7 +19,6 @@
  */
 
 #include "Gui.h"
-#include "Gui_ceviri.h"
 
 void _GuiObject_position (GuiObject me, int left, int right, int top, int bottom, GuiForm parent);
 void * _GuiObject_getUserData (GuiObject me);

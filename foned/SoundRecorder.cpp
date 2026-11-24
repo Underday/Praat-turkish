@@ -303,7 +303,7 @@ static void showMeter (SoundRecorder me, const short *buffertje, integer nsamp) 
 		#endif
 		Graphics_setTextAlignment (my graphics.get(), Graphics_CENTRE, Graphics_HALF);
 		Graphics_setColour (my graphics.get(), Melder_BLACK);
-		Graphics_text (my graphics.get(), 0.5, 0.5, U"Not recording.");
+		Graphics_text (my graphics.get(), 0.5, 0.5, Gui_tr (U"Not recording."));
 		return;
 	}
 	if (my instancePref_meter_which() == kSoundRecorder_meter::INTENSITY) {

@@ -78,6 +78,10 @@ void FunctionArea_drawLegend_ (FunctionArea me,
 	if (! cattableText2) cattableText2 = U"";
 	if (! cattableText3) cattableText3 = U"";
 	if (! cattableText4) cattableText4 = U"";
+	cattableText1 = Gui_trLejant (cattableText1);
+	cattableText2 = Gui_trLejant (cattableText2);
+	cattableText3 = Gui_trLejant (cattableText3);
+	cattableText4 = Gui_trLejant (cattableText4);
 	double lengthText1 = Graphics_textWidth (my graphics(), cattableText1);
 	double lengthText2 = Graphics_textWidth (my graphics(), cattableText2);
 	double lengthText3 = Graphics_textWidth (my graphics(), cattableText3);

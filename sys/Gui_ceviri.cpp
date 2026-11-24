@@ -10,17 +10,43 @@
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
+#include <vector>
 
 namespace {
 
 	std::unordered_map <std::u32string, std::u32string> sozluk;
+	std::unordered_map <std::u32string, std::u32string> kelimeler;   // "@" ile başlayan satırlar
+	std::vector <std::pair <std::u32string, std::u32string>> kaliplar;   // "~" ile başlayan satırlar
+	std::unordered_map <std::string, std::string> bicimler;   // printf biçimleri, UTF-8
 	std::unordered_set <std::u32string> eksikYazilanlar;
 	bool yuklendi = false;
 	bool kapali = false;
+	bool bilgiKapali = false;
 	FILE *eksikDosyasi = nullptr;
 
 	bool sonuIle (const std::u32string& s, const std::u32string& ek) {
 		return s.size () > ek.size () && s.compare (s.size () - ek.size (), ek.size (), ek) == 0;
+	}
+
+	integer yuzdeSayisi (const std::u32string& s) {
+		integer n = 0;
+		for (char32 c : s)
+			if (c == U'%')
+				n ++;
+		return n;
+	}
+
+	integer yildizSayisi (const std::u32string& s) {
+		integer n = 0;
+		for (char32 c : s)
+			if (c == U'*')
+				n ++;
+		return n;
+	}
+
+	void uyar (integer satirNo, const std::u32string& anahtar, conststring32 neden) {
+		fprintf (stderr, "Praat çeviri: satır %ld, \"%s\": %s\n",
+				(long) satirNo, (const char *) Melder_peek32to8 (anahtar.c_str ()), (const char *) Melder_peek32to8 (neden));
 	}
 
 	/*
@@ -39,10 +65,26 @@ namespace {
 			return;
 		std::u32string anahtar = satir.substr (0, sekme);
 		std::u32string karsilik = satir.substr (sekme + 1);
+		if (yuzdeSayisi (anahtar) != yuzdeSayisi (karsilik)) {
+			uyar (satirNo, anahtar, U"% işaretlerinin sayısı tutmuyor, satır atlandı.");
+			return;
+		}
+		if (anahtar [0] == U'@' && anahtar.size () > 1) {
+			kelimeler [anahtar.substr (1)] = karsilik;
+			return;
+		}
+		if (anahtar [0] == U'~' && anahtar.size () > 1) {
+			anahtar.erase (0, 1);
+			if (yildizSayisi (anahtar) != yildizSayisi (karsilik)) {
+				uyar (satirNo, anahtar, U"* işaretlerinin sayısı tutmuyor, satır atlandı.");
+				return;
+			}
+			kaliplar.emplace_back (anahtar, karsilik);
+			return;
+		}
 		for (const char32 *ek : korunacakEkler) {
 			if (sonuIle (anahtar, ek) && ! sonuIle (karsilik, ek)) {
-				fprintf (stderr, "Praat çeviri: satır %ld, \"%s\" karşılığında \"%s\" eki eksik, eklendi.\n",
-						(long) satirNo, (const char *) Melder_peek32to8 (anahtar.c_str ()), (const char *) Melder_peek32to8 (ek));
+				uyar (satirNo, anahtar, U"karşılıkta ek eksik, eklendi.");
 				karsilik += ek;
 			}
 		}
@@ -89,9 +131,17 @@ namespace {
 			kapali = true;
 			return;
 		}
+		const conststring32 bilgi = Melder_getenv (U"PRAAT_CEVIRI_BILGI");
+		bilgiKapali = bilgi && (Melder_equ (bilgi, U"0") || Melder_equ (bilgi, U"yok"));
 		const conststring32 eksikYolu = Melder_getenv (U"PRAAT_CEVIRI_EKSIK");
 		if (eksikYolu && eksikYolu [0] != U'\0')
 			eksikDosyasi = fopen (Melder_peek32to8 (eksikYolu), "a");
+	}
+
+	bool hazir () {
+		if (! yuklendi)
+			yukle ();
+		return ! kapali;
 	}
 
 	const std::u32string *bul (const std::u32string& anahtar) {
@@ -99,17 +149,160 @@ namespace {
 		return it == sozluk.end () ? nullptr : & it -> second;
 	}
 
+	void eksikYaz (const std::u32string& anahtar) {
+		if (eksikDosyasi && eksikYazilanlar.insert (anahtar).second) {
+			fprintf (eksikDosyasi, "%s\n", (const char *) Melder_peek32to8 (anahtar.c_str ()));
+			fflush (eksikDosyasi);
+		}
+	}
+
+	/*
+		Sözlükte tam eşleşme, yoksa eksiz biçimi arar ve eki geri ekler.
+		Sonuç, işaretçinin geçerli kalması için sözlüğe kaydedilir.
+	*/
+	const std::u32string *ara (const std::u32string& anahtar) {
+		if (const std::u32string *karsilik = bul (anahtar))
+			return karsilik;
+		for (const char32 *ek : korunacakEkler) {
+			const std::u32string ekStr (ek);
+			if (sonuIle (anahtar, ekStr)) {
+				if (const std::u32string *kok = bul (anahtar.substr (0, anahtar.size () - ekStr.size ()))) {
+					auto& yeni = sozluk [anahtar];
+					yeni = *kok + ekStr;
+					return & yeni;
+				}
+			}
+		}
+		return nullptr;
+	}
+
+	/*
+		Bilgi penceresi: değer kısmındaki birim sözcükleri ("seconds") çevrilir.
+		Sözcüğün başındaki "(" ve sonundaki ")", ",", "." korunur.
+	*/
+	std::u32string kelimeCevir (const std::u32string& metin) {
+		if (kelimeler.empty ())
+			return metin;
+		std::u32string sonuc;
+		size_t i = 0;
+		while (i < metin.size ()) {
+			if (metin [i] == U' ') {
+				sonuc += U' ';
+				i ++;
+				continue;
+			}
+			size_t son = metin.find (U' ', i);
+			if (son == std::u32string::npos)
+				son = metin.size ();
+			std::u32string kelime = metin.substr (i, son - i);
+			size_t bas = 0, bit = kelime.size ();
+			while (bas < bit && kelime [bas] == U'(')
+				bas ++;
+			while (bit > bas && (kelime [bit - 1] == U')' || kelime [bit - 1] == U',' || kelime [bit - 1] == U'.'))
+				bit --;
+			auto it = kelimeler.find (kelime.substr (bas, bit - bas));
+			if (it != kelimeler.end ())
+				sonuc += kelime.substr (0, bas) + it -> second + kelime.substr (bit);
+			else
+				sonuc += kelime;
+			i = son;
+		}
+		return sonuc;
+	}
+
+	/*
+		"~" kalıpları: "*" herhangi bir metni yakalar, karşılıktaki "*" yerlerine sırayla konur.
+	*/
+	bool kalipla (const std::u32string& satir, const std::u32string& kalip, const std::u32string& karsilik, std::u32string& sonuc) {
+		std::vector <std::u32string> parcalar;
+		size_t bas = 0;
+		for (;;) {
+			const size_t yildiz = kalip.find (U'*', bas);
+			parcalar.push_back (kalip.substr (bas, yildiz == std::u32string::npos ? std::u32string::npos : yildiz - bas));
+			if (yildiz == std::u32string::npos)
+				break;
+			bas = yildiz + 1;
+		}
+		if (satir.compare (0, parcalar [0].size (), parcalar [0]) != 0)
+			return false;
+		std::vector <std::u32string> yakalananlar;
+		size_t konum = parcalar [0].size ();
+		for (size_t k = 1; k < parcalar.size (); k ++) {
+			const std::u32string& parca = parcalar [k];
+			size_t bulunan;
+			if (k == parcalar.size () - 1) {
+				if (satir.size () < konum + parca.size () || satir.compare (satir.size () - parca.size (), parca.size (), parca) != 0)
+					return false;
+				bulunan = satir.size () - parca.size ();
+			} else {
+				bulunan = satir.find (parca, konum);
+				if (bulunan == std::u32string::npos)
+					return false;
+			}
+			yakalananlar.push_back (satir.substr (konum, bulunan - konum));
+			konum = bulunan + parca.size ();
+		}
+		if (parcalar.size () == 1 && satir.size () != parcalar [0].size ())
+			return false;
+		sonuc.clear ();
+		size_t y = 0;
+		for (char32 c : karsilik) {
+			if (c == U'*' && y < yakalananlar.size ())
+				sonuc += kelimeCevir (yakalananlar [y ++]);
+			else
+				sonuc += c;
+		}
+		return true;
+	}
+
+	std::u32string satirCevir (const std::u32string& satir) {
+		const size_t girinti = satir.find_first_not_of (U' ');
+		if (girinti == std::u32string::npos)
+			return satir;
+		const std::u32string bas = satir.substr (0, girinti);
+		const std::u32string icerik = satir.substr (girinti);
+		if (const std::u32string *karsilik = ara (icerik))
+			return bas + *karsilik;
+		std::u32string sonuc;
+		for (const auto& kalip : kaliplar)
+			if (kalipla (icerik, kalip.first, kalip.second, sonuc))
+				return bas + sonuc;
+		const size_t ikiNokta = icerik.find (U": ");
+		if (ikiNokta != std::u32string::npos && ikiNokta > 0) {
+			const std::u32string etiket = icerik.substr (0, ikiNokta);
+			if (const std::u32string *karsilik = ara (etiket))
+				return bas + *karsilik + U": " + kelimeCevir (icerik.substr (ikiNokta + 2));
+			eksikYaz (etiket);
+			return bas + etiket + U": " + kelimeCevir (icerik.substr (ikiNokta + 2));
+		}
+		return bas + kelimeCevir (icerik);
+	}
+
+	std::u32string metinCevir (const std::u32string& metin) {
+		std::u32string sonuc;
+		size_t bas = 0;
+		while (bas < metin.size ()) {
+			size_t son = metin.find (U'\n', bas);
+			if (son == std::u32string::npos) {
+				sonuc += satirCevir (metin.substr (bas));
+				break;
+			}
+			sonuc += satirCevir (metin.substr (bas, son - bas));
+			sonuc += U'\n';
+			bas = son + 1;
+		}
+		return sonuc;
+	}
+
 }
 
 conststring32 Gui_tr (conststring32 english) {
 	if (! english || english [0] == U'\0')
 		return english;
-	if (! yuklendi)
-		yukle ();
-	if (kapali)
+	if (! hazir ())
 		return english;
 	const std::u32string anahtar (english);
-	if (const std::u32string *karsilik = bul (anahtar))
+	if (const std::u32string *karsilik = ara (anahtar))
 		return karsilik -> c_str ();
 	/*
 		Düzenleyici menülerindeki alt öğeler baştaki boşluklarla girintilenir.
@@ -124,20 +317,6 @@ conststring32 Gui_tr (conststring32 english) {
 			return yeni.c_str ();
 		}
 		return english;
-	}
-	/*
-		Ekli biçim sözlükte yoksa eksiz biçime bak ve eki geri ekle.
-		Sonuç, işaretçinin geçerli kalması için sözlüğe kaydedilir.
-	*/
-	for (const char32 *ek : korunacakEkler) {
-		const std::u32string ekStr (ek);
-		if (sonuIle (anahtar, ekStr)) {
-			if (const std::u32string *kok = bul (anahtar.substr (0, anahtar.size () - ekStr.size ()))) {
-				auto& yeni = sozluk [anahtar];
-				yeni = *kok + ekStr;
-				return yeni.c_str ();
-			}
-		}
 	}
 	/*
 		Diyalog başlıkları "Sound: To Intensity" biçimindedir.
@@ -161,11 +340,73 @@ conststring32 Gui_tr (conststring32 english) {
 			return yeni.c_str ();
 		}
 	}
-	if (eksikDosyasi && eksikYazilanlar.insert (anahtar).second) {
-		fprintf (eksikDosyasi, "%s\n", (const char *) Melder_peek32to8 (english));
-		fflush (eksikDosyasi);
-	}
+	eksikYaz (anahtar);
 	return english;
+}
+
+conststring32 Gui_trLejant (conststring32 lejant) {
+	if (! lejant || lejant [0] == U'\0' || ! hazir ())
+		return lejant;
+	const std::u32string metin (lejant);
+	if (const std::u32string *onceki = bul (metin))
+		return onceki -> c_str ();
+	size_t isaret = metin.find (U"%%");   // italik açıklama: türetilmiş, değiştirilemez
+	if (isaret == std::u32string::npos)
+		isaret = metin.find (U"##");   // kalın açıklama: değiştirilebilir
+	if (isaret == std::u32string::npos)
+		return lejant;
+	const std::u32string ad = metin.substr (isaret + 2);
+	const std::u32string *karsilik = ara (ad);
+	if (! karsilik) {
+		eksikYaz (ad);
+		return lejant;
+	}
+	auto& yeni = sozluk [metin];
+	yeni = metin.substr (0, isaret + 2) + *karsilik;
+	return yeni.c_str ();
+}
+
+const char *Gui_trBicim (const char *bicim) {
+	if (! bicim || bicim [0] == '\0' || ! hazir ())
+		return bicim;
+	const std::string anahtar8 (bicim);
+	auto onceki = bicimler.find (anahtar8);
+	if (onceki != bicimler.end ())
+		return onceki -> second.c_str ();
+	std::u32string anahtar;
+	for (unsigned char c : anahtar8) {
+		if (c >= 128)
+			return bicim;   // biçim dizgeleri ASCII, değilse dokunma
+		anahtar += (char32) c;
+	}
+	const std::u32string *karsilik = ara (anahtar);
+	if (! karsilik) {
+		eksikYaz (anahtar);
+		return bicim;
+	}
+	auto& yeni = bicimler [anahtar8];
+	yeni = (const char *) Melder_peek32to8 (karsilik -> c_str ());
+	return yeni.c_str ();
+}
+
+conststring32 Gui_trMetin (conststring32 metin) {
+	if (! metin || metin [0] == U'\0' || ! hazir () || bilgiKapali)
+		return metin;
+	/*
+		Bilgi penceresi her yazışta bütün metni yeniden alır.
+		Önceki metin aynen başta duruyorsa yalnızca yeni eklenen satırlar çevrilir.
+	*/
+	static std::u32string oncekiGirdi, oncekiCikti;
+	const std::u32string girdi (metin);
+	if (! oncekiGirdi.empty () && oncekiGirdi.back () == U'\n'
+		&& girdi.size () >= oncekiGirdi.size () && girdi.compare (0, oncekiGirdi.size (), oncekiGirdi) == 0)
+	{
+		oncekiCikti += metinCevir (girdi.substr (oncekiGirdi.size ()));
+	} else {
+		oncekiCikti = metinCevir (girdi);
+	}
+	oncekiGirdi = girdi;
+	return oncekiCikti.c_str ();
 }
 
 /* End of file Gui_ceviri.cpp */

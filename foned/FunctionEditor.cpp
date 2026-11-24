@@ -267,10 +267,10 @@ static void drawBackgroundAndData (FunctionEditor me) {
 			double value = undefined, inverseValue = 0.0;
 			switch (i) {
 				case 0: {
-					format = my v_format_totalDuration ();
+					format = Gui_trBicim (my v_format_totalDuration ());
 					value = my tmax - my tmin;
 				} break; case 1: {
-					format = my v_format_window ();
+					format = Gui_trBicim (my v_format_window ());
 					value = my endWindow - my startWindow;
 					/*
 						Window domain text.

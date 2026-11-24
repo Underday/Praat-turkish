@@ -95,7 +95,7 @@ Bu dosya Praat arayüzünün Türkçeye çevirisinde kullanılan terimleri ve ge
 | cursor | imleç | |
 | zoom in / out | yakınlaştır / uzaklaştır | |
 | play | çal | |
-| record | kaydet (ses kaydı), kayıt | Dosya kaydetme "Kaydet" ile karışmasın diye "Ses kaydet" |
+| record | kayıt (düğme), ses kaydet (menü) | Dosya kaydetme "Kaydet" ile karışmasın diye kayıt penceresindeki düğme "Kayıt" |
 | save | kaydet | |
 | open / read | aç / oku | |
 | settings | ayarlar | |

@@ -62,7 +62,7 @@ static void gui_information (conststring32 message) {
 		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 		//Melder_casual (U"cocoaTextView retain count before: ", [editor -> textWidget -> d_cocoaTextView  retainCount]);
 	#endif
-	GuiText_setString (editor -> textWidget, message, false);
+	GuiText_setString (editor -> textWidget, Gui_trMetin (message), false);
 	GuiThing_show (editor -> windowForm);
 	/*
 		Try to make sure that the invalidated text widget and the elements of the fronted window are
