@@ -74,7 +74,7 @@ GuiLabel GuiLabel_create (GuiForm parent, int left, int right, int top, int bott
 			gtk_label_set_markup (GTK_LABEL (my d_widget), markedUpText);
 			g_free (markedUpText);
 		} else {
-			my d_widget = gtk_label_new (Melder_peek32to8 (labelText));
+			my d_widget = gtk_label_new (Melder_peek32to8 (Gui_tr (labelText)));
 		}
 		_GuiObject_setUserData (my d_widget, me.get());
 		my v_positionInForm (my d_widget, left, right, top, bottom, parent);
@@ -161,7 +161,7 @@ GuiLabel GuiLabel_createShown (GuiForm parent, int left, int right, int top, int
 
 void GuiLabel_setText (GuiLabel me, conststring32 text /* cattable */) {
 	#if gtk
-		gtk_label_set_text (GTK_LABEL (my d_widget), Melder_peek32to8 (text));
+		gtk_label_set_text (GTK_LABEL (my d_widget), Melder_peek32to8 (Gui_tr (text)));
 	#elif motif
 		my d_widget -> name = Melder_dup_f (text);
 		_GuiNativeControl_setTitle (my d_widget);

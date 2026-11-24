@@ -94,7 +94,7 @@ GuiCheckButton GuiCheckButton_create (GuiForm parent, int left, int right, int t
 	my d_valueChangedCallback = valueChangedCallback;
 	my d_valueChangedBoss = valueChangedBoss;
 	#if gtk
-		my d_widget = gtk_check_button_new_with_label (Melder_peek32to8 (buttonText));
+		my d_widget = gtk_check_button_new_with_label (Melder_peek32to8 (Gui_tr (buttonText)));
 		_GuiObject_setUserData (my d_widget, me.get());
 		my v_positionInForm (my d_widget, left, right, top, bottom, parent);
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (my d_widget), (flags & GuiCheckButton_SET) != 0);

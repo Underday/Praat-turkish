@@ -395,7 +395,7 @@ GuiMenu GuiMenu_createInWindow (GuiWindow window, conststring32 title, uint32 fl
 	#if gtk
 		Melder_assert (window);
 		trace (U"create and show the menu title");
-		my d_gtkMenuTitle = (GtkMenuItem *) gtk_menu_item_new_with_label (Melder_peek32to8 (title));
+		my d_gtkMenuTitle = (GtkMenuItem *) gtk_menu_item_new_with_label (Melder_peek32to8 (Gui_tr (title)));
 		gtk_menu_shell_append (GTK_MENU_SHELL (window -> d_gtkMenuBar), GTK_WIDGET (my d_gtkMenuTitle));
 		if (flags & GuiMenu_INSENSITIVE)
 			gtk_widget_set_sensitive (GTK_WIDGET (my d_gtkMenuTitle), false);
@@ -513,7 +513,7 @@ GuiMenu GuiMenu_createInMenu (GuiMenu supermenu, conststring32 title, uint32 fla
 	my d_menuItem -> d_parent = supermenu;
 	my d_menuItem -> d_menu = me.get();
 	#if gtk
-		my d_menuItem -> d_widget = gtk_menu_item_new_with_label (Melder_peek32to8 (title));
+		my d_menuItem -> d_widget = gtk_menu_item_new_with_label (Melder_peek32to8 (Gui_tr (title)));
 		my d_widget = gtk_menu_new ();
 		GtkAccelGroup *ag = (GtkAccelGroup *) gtk_menu_get_accel_group (GTK_MENU (supermenu -> d_widget));
 		if (ag)
@@ -575,11 +575,11 @@ GuiMenu GuiMenu_createInForm (GuiForm form, int left, int right, int top, int bo
 	my d_cascadeButton -> d_parent = form;
 	my d_cascadeButton -> d_menu = me.get();
 	static MelderString neatTitle;
-	MelderString_copy (& neatTitle, title);
+	MelderString_copy (& neatTitle, Gui_tr (title));
 	if (neatTitle. length >= 1 && neatTitle.string [neatTitle. length - 1] == U'-') {
 		constexpr conststring32 narrowSpacesForPreciseAlignment =
 				UNITEXT_NARROW_NO_BREAK_SPACE  UNITEXT_NARROW_NO_BREAK_SPACE  U"   ";
-		MelderString_copy (& neatTitle, narrowSpacesForPreciseAlignment, title);
+		MelderString_copy (& neatTitle, narrowSpacesForPreciseAlignment, Gui_tr (title));
 		neatTitle.string [neatTitle. length - 1] = U' ';
 		/*
 			bikeshed choices for the disclosure sign:

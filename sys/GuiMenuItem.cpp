@@ -173,21 +173,21 @@ GuiMenuItem GuiMenu_addItem (GuiMenu menu, conststring32 title, uint32 flags,
 		[[maybe_unused]] constexpr conststring32 countersink = U"\u2335";
 		[[maybe_unused]] constexpr conststring32 canadian_syllabics_pe = U"\u142F";
 		[[maybe_unused]] constexpr conststring32 logical_or = U"\u2228";
-		MelderString_copy (& neatTitle, down_triangle, U" ", title);
+		MelderString_copy (& neatTitle, down_triangle, U" ", Gui_tr (title));
 		//neatTitle.string [neatTitle.length - 1] = U' ';
 	} else {
-		MelderString_copy (& neatTitle, title);
+		MelderString_copy (& neatTitle, Gui_tr (title));
 	}
 	#if gtk
 		static GSList *group = nullptr;
 		if (toggle) {
 			if (flags & (GuiMenu_RADIO_FIRST)) group = nullptr;
 			if (flags & (GuiMenu_RADIO_FIRST | GuiMenu_RADIO_NEXT)) {
-				my d_widget = gtk_radio_menu_item_new_with_label (group, Melder_peek32to8 (title));
+				my d_widget = gtk_radio_menu_item_new_with_label (group, Melder_peek32to8 (Gui_tr (title)));
 				group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (my d_widget));
 				trace (U"created a radio menu item with title \"", title, U"\", group ", Melder_pointer (group));
 			} else {
-				my d_widget = gtk_check_menu_item_new_with_label (Melder_peek32to8 (title));
+				my d_widget = gtk_check_menu_item_new_with_label (Melder_peek32to8 (Gui_tr (title)));
 			}
 		} else {
 			my d_widget = gtk_menu_item_new_with_label (Melder_peek32to8 (neatTitle.string));
@@ -464,7 +464,7 @@ void GuiMenuItem_check (GuiMenuItem me, bool check) {
 
 void GuiMenuItem_setText (GuiMenuItem me, conststring32 text) {
 	#if gtk
-		gtk_label_set_label (GTK_LABEL (gtk_bin_get_child (GTK_BIN (my d_widget))), Melder_peek32to8 (text));
+		gtk_label_set_label (GTK_LABEL (gtk_bin_get_child (GTK_BIN (my d_widget))), Melder_peek32to8 (Gui_tr (text)));
 	#elif motif
 		conststring8 text_utf8 = Melder_peek32to8 (text);
 		XtVaSetValues (my d_widget, XmNlabelString, text_utf8, nullptr);

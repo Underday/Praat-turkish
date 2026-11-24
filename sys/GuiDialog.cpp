@@ -102,7 +102,7 @@ GuiDialog GuiDialog_create (GuiWindow parent, int x, int y, int width, int heigh
 		gtk_widget_show (GTK_WIDGET (my d_widget));
 		g_signal_connect (G_OBJECT (my d_widget), "destroy", G_CALLBACK (_GuiGtkDialog_destroyCallback), me.get());
 		#if defined (chrome)
-			my chrome_surrogateShellTitleLabelWidget = gtk_label_new (Melder_peek32to8 (title));
+			my chrome_surrogateShellTitleLabelWidget = gtk_label_new (Melder_peek32to8 (Gui_tr (title)));
 			gtk_label_set_use_markup (GTK_LABEL (my chrome_surrogateShellTitleLabelWidget), true);
 			gtk_widget_set_size_request (GTK_WIDGET (my chrome_surrogateShellTitleLabelWidget), width, 31 /*Machine_getTextHeight()*/);
 			gtk_misc_set_alignment (GTK_MISC (my chrome_surrogateShellTitleLabelWidget), 0.5, 0.0);

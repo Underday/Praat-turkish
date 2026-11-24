@@ -143,7 +143,7 @@ GuiButton GuiButton_create (GuiForm parent, int left, int right, int top, int bo
 		}
 	}
 	#if gtk
-		my d_widget = gtk_button_new_with_label (Melder_peek32to8 (buttonText));
+		my d_widget = gtk_button_new_with_label (Melder_peek32to8 (Gui_tr (buttonText)));
 		gtk_button_set_relief (GTK_BUTTON (my d_widget), GTK_RELIEF_NORMAL);
 		_GuiObject_setUserData (my d_widget, me.get());
 		my v_positionInForm (my d_widget, left, right, top, bottom, parent);
@@ -231,7 +231,7 @@ GuiButton GuiButton_createShown (GuiForm parent, int left, int right, int top, i
 
 void GuiButton_setText (GuiButton me, conststring32 text /* cattable */) {
 	#if gtk
-		gtk_button_set_label (GTK_BUTTON (my d_widget), Melder_peek32to8 (text));
+		gtk_button_set_label (GTK_BUTTON (my d_widget), Melder_peek32to8 (Gui_tr (text)));
 	#elif motif
 		my d_widget -> name = Melder_dup_f (text);
 		_GuiNativeControl_setTitle (my d_widget);

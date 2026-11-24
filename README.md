@@ -1,3 +1,5 @@
+> **Türkçe arayüz:** bu dal Praat arayüzünün Türkçe çevirisini içerir. Kurulum ve katkı için [README_TR.md](README_TR.md), terimler için [TERIMLER.md](TERIMLER.md).
+
 # Praat: doing phonetics by computer
 
 Welcome to Praat! Praat is a speech analysis tool used for doing phonetics by computer.

@@ -163,7 +163,7 @@ int GuiShell_getShellHeight (GuiShell me) {
 
 void GuiShell_setTitle (GuiShell me, conststring32 title /* cattable */) {
 	#if gtk
-		gtk_window_set_title (my d_gtkWindow, Melder_peek32to8 (title));
+		gtk_window_set_title (my d_gtkWindow, Melder_peek32to8 (Gui_tr (title)));
 		#if defined (chrome)
 			if (my chrome_surrogateShellTitleLabelWidget) {
 				char *markup = g_markup_printf_escaped ("<span weight=\"ultrabold\" underline=\"low\">%s</span>", Melder_peek32to8 (title));

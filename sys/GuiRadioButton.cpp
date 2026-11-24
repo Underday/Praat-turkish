@@ -151,7 +151,7 @@ GuiRadioButton GuiRadioButton_create (GuiForm parent, int left, int right, int t
 	my d_previous = latestRadioButton;
 	my d_next = nullptr;
 	#if gtk
-		my d_widget = gtk_radio_button_new_with_label_from_widget (latestRadioButton ? GTK_RADIO_BUTTON (latestRadioButton -> d_widget) : nullptr, Melder_peek32to8 (buttonText));
+		my d_widget = gtk_radio_button_new_with_label_from_widget (latestRadioButton ? GTK_RADIO_BUTTON (latestRadioButton -> d_widget) : nullptr, Melder_peek32to8 (Gui_tr (buttonText)));
 		_GuiObject_setUserData (my d_widget, me.get());
 		my v_positionInForm (my d_widget, left, right, top, bottom, parent);
 		if (flags & GuiRadioButton_SET) {
