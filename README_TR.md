@@ -35,6 +35,19 @@ ceviri/kur.sh            # sözlüğü ~/.config/praat/ceviri_tr.tsv olarak bağ
 
 `ceviri/kur.sh --kaldir` sözlüğü kaldırır, Praat yeniden İngilizce açılır. Sözlük başka bir yerdeyse `PRAAT_CEVIRI=/yol/ceviri_tr.tsv ./praat` ile verilebilir.
 
+## Windows
+
+Zip'i açıp `Praat.exe` dosyasını çalıştırmak yeterli, kurulum gerekmez. Sözlük (`ceviri_tr.tsv`) `Praat.exe` ile aynı klasörde durmalı. Program imzasız olduğu için Windows ilk açılışta uyarı verebilir ("Ek bilgi", sonra "Yine de çalıştır").
+
+![Windows (Wine)](ceviri/ekran/windows-wine.png)
+
+Zip iki yoldan üretilebilir:
+
+- Linux'ta: `ceviri/windows/derle.sh` (Arch'ta `mingw-w64-gcc` paketi gerekir). Çıktı `../praat-win/dagitim/` altına yazılır.
+- GitHub Actions'ta: `windows-` ile başlayan bir etiket push edilince `.github/workflows/windows-turkce.yml` çalışır, zip iş akışının "Artifacts" bölümünden indirilir.
+
+Windows sürümü şimdiye kadar yalnızca Wine altında denendi.
+
 ## Çeviriye katkı
 
 1. Terim seçimleri `TERIMLER.md` dosyasında. Yeni bir terim önce oraya yazılır.
@@ -76,7 +89,7 @@ Kaynak: Kılıç, M. A. (2014). Özelleştirilmiş Praat programı ile uygulama.
 - Çeviri metne bakıyor, bağlama bakmıyor. Aynı İngilizce sözcük her yerde aynı Türkçe karşılığı alır.
 - Bilgi penceresi yalnızca ekranda çevriliyor. Scriptlerin `info$ ()` ile okuduğu metin İngilizce kalıyor, ancak Bilgi penceresinden kopyalanan ya da "Farklı kaydet" ile kaydedilen metin Türkçe olur. Kendi scriptinizin yazdırdığı satırlar da sözlükteki bir etiketle başlıyorsa Türkçe görünür. Bilgi penceresi çevirisini kapatmak için `PRAAT_CEVIRI_BILGI=0 ./praat`.
 - Düzenleyicinin çizim alanında açıklamalar ("türetilmiş spektrogram") ve süre çubukları çevriliyor. Eksen yazıları, Çizim penceresine çizilen yazılar, hata mesajları ve kılavuz sayfaları çevrilmiyor.
-- Şimdilik yalnızca Linux (GTK) arayüzünde denendi. Kod macOS ve Windows tarafına da bağlanabilir, ancak orada çağrılar ayrı.
+- Linux'ta ve Windows'ta (Wine altında) denendi. macOS tarafı henüz bağlanmadı.
 
 ## Lisans
 

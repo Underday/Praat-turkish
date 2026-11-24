@@ -1,10 +1,13 @@
 # Praat Türkçe arayüz, Windows x64 derlemesi.
-# Yalnızca elle tetiklenir (Actions > Windows Türkçe derleme > Run workflow).
+# Elle tetiklenir (Actions > Windows Türkçe derleme > Run workflow, iş akışı varsayılan dalda olmalı)
+# ya da "windows-" ile başlayan bir etiket push edilince çalışır (git tag windows-v1 && git push origin windows-v1).
 # Private depoda her çalıştırma Windows dakikası harcar.
 name: Windows Türkçe derleme
 
 on:
   workflow_dispatch:
+  push:
+    tags: [ "windows-*" ]
 
 jobs:
   windows-x64:
