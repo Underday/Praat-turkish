@@ -4,12 +4,12 @@ Bu dosya Praat arayüzünün Türkçeye çevirisinde kullanılan terimleri ve ge
 
 ## İlkeler
 
-1. **Anlaşılırlık önce gelir.** Kullanıcı kitlesi dil ve konuşma terapistleri (DKT), dilbilim ve fonetik öğrencileri. Türkçe dilbilim ve DKT literatüründe yerleşik bir karşılık varsa o kullanılır.
-2. **Yerleşik karşılık yoksa terim korunur**, ilk geçtiği yerde parantezle açıklanır: "jitter (frekans düzensizliği)".
-3. **Praat nesne adları çevrilmez.** Sound, TextGrid, Pitch, Intensity, Formant, Spectrogram, PointProcess, Harmonicity, Manipulation, PitchTier gibi adlar Nesneler penceresindeki listede, script komutlarında (`selectObject: "Sound ses"`, `To Pitch...`) ve kılavuzda İngilizce geçer. Arayüzde başka bir ad görünürse kullanıcı script yazarken ya da kılavuzu okurken eşleştiremez. Bu yüzden komut etiketlerinde nesne adı İngilizce bırakılır: "To Pitch..." için "Pitch hesapla...".
-4. **Komutların iç adları değişmez.** Çeviri yalnızca ekranda görünen etikete uygulanır (`sys/Gui_ceviri.cpp`). Scriptler, "Paste history" ve düğme ayarları İngilizce komut adlarıyla çalışmaya devam eder. Dolayısıyla Türkçe arayüzde çalışan biri script yazarken İngilizce adı kullanmalı. Bunun için kılavuz ve Paste history yeterli.
-5. **Ekler korunur.** "..." ile biten komut bir diyalog açar, ":" ile biten menü öğesi alt menüdür, " -" ile biten düğme bir eylem grubudur. Türkçe karşılık aynı ekle biter.
-6. **Fiil biçimi:** menü komutları emir kipinde ve kısa: "Aç", "Kaydet", "Sorgula", "Çiz". Başlıklar ad biçiminde: "Analiz", "Sorgu", "Görünüm".
+1. Anlaşılırlık önce gelir. Kullanıcı kitlesi dil ve konuşma terapistleri (DKT), dilbilim ve fonetik öğrencileri. Türkçe dilbilim ve DKT literatüründe yerleşik bir karşılık varsa o kullanılır.
+2. Yerleşik karşılık yoksa terim korunur, ilk geçtiği yerde parantezle açıklanır: "jitter (frekans düzensizliği)".
+3. Praat nesne adları çevrilmez. Sound, TextGrid, Pitch, Intensity, Formant, Spectrogram, PointProcess, Harmonicity, Manipulation, PitchTier gibi adlar Nesneler penceresindeki listede, script komutlarında (`selectObject: "Sound ses"`, `To Pitch...`) ve kılavuzda İngilizce geçer. Arayüzde başka bir ad görünürse kullanıcı script yazarken ya da kılavuzu okurken eşleştiremez. Bu yüzden komut etiketlerinde nesne adı İngilizce bırakılır: "To Pitch..." için "Pitch hesapla...". Düzenleyici penceresindeki menü başlıkları (Perde (F0), Şiddet, Spektrogram, Formantlar) ise nesneyi değil ekranda gösterilen analizi adlandırdığı için çevrilir. Düzenleyicideki "Sound" menüsü çevrilmedi, çünkü aynı anahtar Yeni menüsünde nesne türü alt menüsü olarak da geçiyor ve sözlük bağlam ayırmıyor.
+4. Komutların iç adları değişmez. Çeviri yalnızca ekranda görünen etikete uygulanır (`sys/Gui_ceviri.cpp`). Scriptler, "Paste history" ve düğme ayarları İngilizce komut adlarıyla çalışmaya devam eder. Dolayısıyla Türkçe arayüzde çalışan biri script yazarken İngilizce adı kullanmalı. Bunun için kılavuz ve Paste history yeterli.
+5. Ekler korunur. "..." ile biten komut bir diyalog açar, ":" ile biten menü öğesi alt menüdür, " -" ile biten düğme bir eylem grubudur. Türkçe karşılık aynı ekle biter.
+6. Fiil biçimi: menü komutları emir kipinde ve kısa: "Aç", "Kaydet", "Sorgula", "Çiz". Başlıklar ad biçiminde: "Analiz", "Sorgu", "Görünüm".
 
 ## Fonetik ve akustik terimler
 
@@ -37,7 +37,7 @@ Bu dosya Praat arayüzünün Türkçeye çevirisinde kullanılan terimleri ve ge
 | shimmer | shimmer (genlik düzensizliği) | Yerleşik Türkçe karşılık yok, terim korunur |
 | voice report | ses raporu | |
 | voice breaks | ses kırılmaları | |
-| voiced / voiceless | ötümlü / ötümsüz | Türkçe dilbilimde yerleşik. DKT'de "sesli/sessiz" de geçer, ama "sesli" ünlü anlamıyla karışır |
+| voiced / voiceless | ötümlü / ötümsüz | Türkçe dilbilimde yerleşik. DKT'de "sesli/sessiz" de geçer, ancak "sesli" ünlü anlamıyla karışır |
 | vowel / consonant | ünlü / ünsüz | |
 | pulses (glottal pulses) | titreşim noktaları (pulses) | Praat'taki PointProcess nesnesi |
 | glottal | glottal | |

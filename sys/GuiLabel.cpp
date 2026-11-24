@@ -70,7 +70,7 @@ GuiLabel GuiLabel_create (GuiForm parent, int left, int right, int top, int bott
 		if (flags & GuiLabel_BOLD) {
 			my d_widget = gtk_label_new (nullptr);
 			const char *format = "<b>%s</b>";
-			char *markedUpText = g_markup_printf_escaped (format, Melder_peek32to8 (labelText));
+			char *markedUpText = g_markup_printf_escaped (format, Melder_peek32to8 (Gui_tr (labelText)));
 			gtk_label_set_markup (GTK_LABEL (my d_widget), markedUpText);
 			g_free (markedUpText);
 		} else {

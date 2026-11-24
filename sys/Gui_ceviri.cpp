@@ -139,6 +139,28 @@ conststring32 Gui_tr (conststring32 english) {
 			}
 		}
 	}
+	/*
+		Diyalog başlıkları "Sound: To Intensity" biçimindedir.
+		Nesne türü (iki noktadan önceki kısım) korunur, komut adı çevrilir.
+	*/
+	const size_t ikiNokta = anahtar.find (U": ");
+	if (ikiNokta != std::u32string::npos && ikiNokta > 0 && ikiNokta + 2 < anahtar.size ()
+		&& anahtar.find (U' ') > ikiNokta)
+	{
+		if (const std::u32string *komut = bul (anahtar.substr (ikiNokta + 2))) {
+			auto& yeni = sozluk [anahtar];
+			yeni = anahtar.substr (0, ikiNokta + 2) + *komut;
+			return yeni.c_str ();
+		}
+		/*
+			Başlıkta "..." yoktur, sözlükte ise komut "..." ile kayıtlı olabilir.
+		*/
+		if (const std::u32string *komut = bul (anahtar.substr (ikiNokta + 2) + U"...")) {
+			auto& yeni = sozluk [anahtar];
+			yeni = anahtar.substr (0, ikiNokta + 2) + komut -> substr (0, komut -> size () - 3);
+			return yeni.c_str ();
+		}
+	}
 	if (eksikDosyasi && eksikYazilanlar.insert (anahtar).second) {
 		fprintf (eksikDosyasi, "%s\n", (const char *) Melder_peek32to8 (english));
 		fflush (eksikDosyasi);

@@ -4,6 +4,8 @@ Bu depo, Praat'ın (konuşma analizi ve fonetik programı, https://praat.org) ar
 
 ![Nesneler penceresi](ceviri/ekran/nesneler-penceresi.png)
 ![TextGrid düzenleyici](ceviri/ekran/textgrid-duzenleyici.png)
+![Periyodiklik analizi menüsü](ceviri/ekran/periyodiklik-menusu.png)
+![Pitch hesapla diyaloğu](ceviri/ekran/pitch-diyalogu.png)
 
 ## Nasıl çalışıyor
 
@@ -50,7 +52,7 @@ ceviri/kur.sh            # sözlüğü ~/.config/praat/ceviri_tr.tsv olarak bağ
 
 - Çeviri metne bakıyor, bağlama bakmıyor. Aynı İngilizce sözcük her yerde aynı Türkçe karşılığı alır.
 - Grafik alanına çizilen yazılar (düzenleyicideki "Visible part", "Total duration", eksen yazıları), Bilgi penceresindeki çıktılar, hata mesajları ve kılavuz sayfaları çevrilmiyor.
-- Şimdilik yalnızca Linux (GTK) arayüzünde denendi. Kod macOS ve Windows tarafına da bağlanabilir ama orada çağrılar ayrı.
+- Şimdilik yalnızca Linux (GTK) arayüzünde denendi. Kod macOS ve Windows tarafına da bağlanabilir, ancak orada çağrılar ayrı.
 
 ## Lisans
 
