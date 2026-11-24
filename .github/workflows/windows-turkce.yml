@@ -35,7 +35,9 @@ jobs:
           mingw-w64-ucrt-x86_64-zlib
 
     - name: Derle
-      run: make PRAAT_COMPILER=gcc PRAAT_ARCH=x64v1 -j4
+      # MinGW'nin kendi printf/scanf sürümü: Praat açılışta %td biçimini denetler,
+      # bu bayrakla denetim Windows'un ya da Wine'ın C kütüphanesine bağlı kalmaz.
+      run: make PRAAT_COMPILER=gcc PRAAT_ARCH=x64v1 CC="gcc -D__USE_MINGW_ANSI_STDIO=1" CXX="g++ -D__USE_MINGW_ANSI_STDIO=1" -j4
 
     - name: Paketle
       run: |
@@ -45,11 +47,15 @@ jobs:
         cp Praat.exe ceviri/ceviri_tr.tsv ceviri/windows/BENIOKU.txt "dagitim/$AD/"
         echo "AD=$AD" >> "$GITHUB_ENV"
 
-    - name: Sınama (script modunda açılış)
-      run: ./Praat.exe --version
-
     - name: Yükle
       uses: actions/upload-artifact@v4
       with:
         name: ${{ env.AD }}
         path: dagitim/${{ env.AD }}
+
+    # Zip önce yüklenir, sınama düşerse bile indirilebilir kalır (çalıştırma kırmızı görünür).
+    - name: Sınama (script modunda açılış, açılış denetimleri dahil)
+      run: |
+        printf 'writeInfoLine: 2 + 2\n' > sinama.praat
+        ./Praat.exe --run sinama.praat | tee sinama.txt
+        grep -q 4 sinama.txt
