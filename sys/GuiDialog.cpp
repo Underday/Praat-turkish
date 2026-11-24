@@ -17,6 +17,7 @@
  */
 
 #include "GuiP.h"
+#include <vector>   // Windows kolundaki std::vector için (MSYS2 clang64 libc++ dolaylı olarak getirmiyor)
 
 Thing_implement (GuiDialog, GuiShell, 0);
 
