@@ -10,7 +10,7 @@ sources = '''
 	Graphics_colour.cpp Graphics_image.cpp Graphics_record.cpp
 	Graphics_utils.cpp Graphics_grey.cpp Graphics_altitude.cpp
 	GraphicsPostscript.cpp GraphicsScreen.cpp Graphics_surface.cpp
-	Gui.cpp GuiButton.cpp GuiCheckButton.cpp GuiControl.cpp GuiDialog.cpp GuiDrawingArea.cpp GuiFileSelect.cpp GuiForm.cpp GuiLabel.cpp GuiList.cpp GuiMenu.cpp GuiMenuItem.cpp Gui_messages.cpp GuiObject.cpp GuiOptionMenu.cpp GuiProgressBar.cpp GuiRadioButton.cpp GuiScale.cpp GuiScrollBar.cpp GuiScrolledWindow.cpp GuiShell.cpp GuiText.cpp GuiThing.cpp GuiWindow.cpp Gui_ceviri.cpp
+	Gui.cpp GuiButton.cpp GuiCheckButton.cpp GuiControl.cpp GuiDialog.cpp GuiDrawingArea.cpp GuiFileSelect.cpp GuiForm.cpp GuiLabel.cpp GuiList.cpp GuiMenu.cpp GuiMenuItem.cpp Gui_messages.cpp GuiObject.cpp GuiOptionMenu.cpp GuiProgressBar.cpp GuiRadioButton.cpp GuiScale.cpp GuiScrollBar.cpp GuiScrolledWindow.cpp GuiShell.cpp GuiText.cpp GuiThing.cpp GuiWindow.cpp Gui_ceviri.cpp praat_ceviri.cpp
 	GuiTrust.cpp
 	HyperPage.cpp InfoEditor.cpp Interpreter.cpp
 	machine.cpp

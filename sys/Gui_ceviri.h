@@ -42,5 +42,16 @@ const char *Gui_trBicim (const char *bicim);
 */
 conststring32 Gui_trMetin (conststring32 metin);
 
+/*
+	Arayüz dili ayarı. Varsayılan Türkçe. Değişiklik Praat yeniden açılınca geçerli olur.
+*/
+bool Gui_ceviri_turkceMi ();
+void Gui_ceviri_turkceAyarla (bool turkce);
+
+/*
+	Praat > Settings > Interface language... komutunu ekler (praat_ceviri.cpp).
+*/
+void praat_ceviri_addMenus ();
+
 #endif
 /* End of file Gui_ceviri.h */

@@ -107,6 +107,11 @@ namespace {
 				return;   // henüz belirlenmedi, bir sonraki çağrıda yeniden dene
 			MelderFolder_getFile (tercihKlasoru, U"ceviri_tr.tsv", & dosya);
 		}
+		if (! Gui_ceviri_turkceMi ()) {
+			kapali = true;
+			yuklendi = true;
+			return;
+		}
 		yuklendi = true;
 		if (! MelderFile_exists (& dosya)) {
 			kapali = true;
@@ -294,6 +299,39 @@ namespace {
 		return sonuc;
 	}
 
+}
+
+/*
+	Arayüz dili ayarı <tercih klasörü>/ceviri_ayar.txt dosyasında tutulur ("dil: tr" ya da "dil: en").
+	Praat'ın kendi tercih dosyası menüler kurulduktan sonra okunduğu için ayrı bir dosya kullanılır.
+	Dosya yoksa arayüz Türkçe açılır.
+*/
+static bool ayarDosyasi (MelderFile dosya) {
+	MelderFolder tercihKlasoru = Melder_preferencesFolder ();
+	if (MelderFolder_isNull (tercihKlasoru))
+		return false;
+	MelderFolder_getFile (tercihKlasoru, U"ceviri_ayar.txt", dosya);
+	return true;
+}
+
+bool Gui_ceviri_turkceMi () {
+	structMelderFile dosya { };
+	if (! ayarDosyasi (& dosya) || ! MelderFile_exists (& dosya))
+		return true;
+	try {
+		autostring32 metin = MelderFile_readText (& dosya);
+		return ! str32str (metin.get (), U"dil: en");
+	} catch (MelderError) {
+		Melder_clearError ();
+		return true;
+	}
+}
+
+void Gui_ceviri_turkceAyarla (bool turkce) {
+	structMelderFile dosya { };
+	if (! ayarDosyasi (& dosya))
+		return;
+	MelderFile_writeText_i (& dosya, turkce ? U"dil: tr\n" : U"dil: en\n", kMelder_textOutputEncoding::UTF8);
 }
 
 conststring32 Gui_tr (conststring32 english) {
