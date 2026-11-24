@@ -21,19 +21,21 @@ jobs:
     - name: Depoyu al
       uses: actions/checkout@v4
 
-    - name: MSYS2 (clang64) kur
+    # UCRT64: GCC ve libstdc++ (yerel MinGW derlemesiyle aynı kütüphane) + UCRT (Praat'ın resmî derlemesi gibi).
+    # CLANG64 (libc++) ile Praat'ın bazı dosyaları <vector> başlığını dolaylı bulamıyor.
+    - name: MSYS2 (ucrt64) kur
       uses: msys2/setup-msys2@v2
       with:
-        msystem: CLANG64
+        msystem: UCRT64
         update: true
         install: >-
           make
           zip
-          mingw-w64-clang-x86_64-clang
-          mingw-w64-clang-x86_64-zlib
+          mingw-w64-ucrt-x86_64-gcc
+          mingw-w64-ucrt-x86_64-zlib
 
     - name: Derle
-      run: make PRAAT_ARCH=x64v1 -j4
+      run: make PRAAT_COMPILER=gcc PRAAT_ARCH=x64v1 -j4
 
     - name: Paketle
       run: |
