@@ -8,6 +8,7 @@
 Add action command: "Sound", 0, "", 0, "", 0, "Turkish tools -", "", 0, ""
 Add action command: "Sound", 0, "", 0, "", 0, "Voice quality report...", "Turkish tools -", 1, "ses_kalitesi.praat"
 Add action command: "Sound", 0, "", 0, "", 0, "Spectral tilt measures...", "Voice quality report...", 1, "spektral_egim.praat"
+Add action command: "Sound", 0, "", 0, "", 0, "Cepstrum plot (CPP)...", "Spectral tilt measures...", 1, "kepstrum_cizimi.praat"
 
 # Sound ve TextGrid birlikte seçiliyken
 Add action command: "Sound", 1, "TextGrid", 1, "", 0, "Turkish tools -", "", 0, ""

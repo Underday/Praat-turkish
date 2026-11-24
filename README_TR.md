@@ -74,6 +74,7 @@ Windows sürümü şimdiye kadar yalnızca Wine altında denendi.
 |---|---|---|
 | Sound seçiliyken | Ses kalitesi raporu | Perde istatistikleri, jitter, shimmer, HNR, CPPS. İsteğe bağlı CSV |
 | Sound seçiliyken | Spektral eğim ölçüleri | H1-H2, H1-A1, H1-A3 (düzeltilmemiş), LTAS eğimi, alfa oranı |
+| Sound seçiliyken | Kepstrum grafiği (CPP) | Bir zaman noktasındaki kepstrumu eğilim çizgisi ve işaretli CPP ile çizer, bütün sesin CPPS değerini verir |
 | Sound ve TextGrid | Etiketli aralıkları ölç | Her etiketli aralık için süre, perde, şiddet, orta noktada F1 F2 F3, spektral momentler (CSV) |
 | Sound ve TextGrid | Ünlü grafiği (F1-F2) | Etiketli ünlüleri Çizim penceresinde F1-F2 düzleminde çizer |
 | Sound ve TextGrid | Etiketli aralıkları WAV olarak kaydet | Her etiketli aralığı ayrı dosyaya böler |

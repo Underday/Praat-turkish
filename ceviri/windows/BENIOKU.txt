@@ -18,7 +18,8 @@ uyarısı verebilir. "Ek bilgi" bağlantısına, sonra "Yine de çalıştır" d�
 Türkçe araçlar eklentisi (isteğe bağlı): kur.bat dosyasına çift tıklayın, sonra Praat'ı
 yeniden açın. Eklenti %APPDATA%\Praat\plugin_TurkceAraclar klasörüne kopyalanır.
 Komutlar şuralarda görünür:
-  Sound seçiliyken: Türkçe araçlar > Ses kalitesi raporu, Spektral eğim ölçüleri
+  Sound seçiliyken: Türkçe araçlar > Ses kalitesi raporu, Spektral eğim ölçüleri,
+    Kepstrum grafiği (CPP)
   Sound ve TextGrid seçiliyken: Türkçe araçlar > Etiketli aralıkları ölç, Ünlü grafiği,
     Etiketli aralıkları WAV olarak kaydet
   Yeni menüsünde: Türkçe araçlar > Klasörün ses kalitesi, Klasörü ölç,

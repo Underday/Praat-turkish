@@ -1706,3 +1706,13 @@ Run script: Voice quality of folder	Script çalıştır: Klasörün ses kalitesi
 Run script: Measure folder	Script çalıştır: Klasörü ölç
 Run script: Pause analysis of folder	Script çalıştır: Klasörün duraklama analizi
 Run script: Convert folder	Script çalıştır: Klasörü dönüştür
+## Kepstrum grafiği
+Cepstrum plot (CPP)...	Kepstrum grafiği (CPP)...
+Cepstrum plot (CPP)	Kepstrum grafiği (CPP)
+Run script: Cepstrum plot (CPP)	Script çalıştır: Kepstrum grafiği (CPP)
+Time (s, 0 = middle)	Zaman (s, 0 = orta nokta)
+Maximum quefrency (s)	En büyük kuefrens (s)
+Cepstral peak prominence (CPP)	Kepstral tepe belirginliği (CPP)
+Quefrency of peak	Tepenin kuefrensi
+Frequency of peak	Tepenin frekansı
+CPPS (whole sound)	CPPS (bütün ses)
