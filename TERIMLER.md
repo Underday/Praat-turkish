@@ -80,6 +80,7 @@ Bu dosya Praat arayüzünün Türkçeye çevirisinde kullanılan terimleri ve ge
 |---|---|---|
 | Objects window | Nesneler penceresi | |
 | Picture window | Çizim penceresi | |
+| World (Çizim penceresi menüsü) | Çiz | "world coordinates" grafikte verinin kendi birimiyle konum demek. Menüde metin, çizgi, şekil ve eksen komutları var, "Dünya koordinatları" yanıltıcıydı |
 | Info window | Bilgi penceresi | |
 | editor | düzenleyici | |
 | View & Edit | Görüntüle ve düzenle | |
