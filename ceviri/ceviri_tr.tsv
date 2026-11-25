@@ -308,7 +308,7 @@ Spectrogram	Spektrogram
 Pitch	Perde (F0)
 Intensity	Şiddet
 Formants	Formantlar
-Pulses	Glottal darbeler
+Pulses	Glottal atımlar
 Interval	Aralık
 Boundary	Sınır
 Tier	Katman
@@ -487,15 +487,15 @@ Draw formants to picture window:	Formantları çizim penceresine çiz:
 Draw visible formant contour...	Görünen formant eğrisini çiz...
 Extract formants to objects window:	Formantları nesneler penceresine çıkar:
 Extract visible formant contour	Görünen formant eğrisini çıkar
-Show pulses	Darbeleri göster
-Advanced pulses settings...	Gelişmiş darbe ayarları...
-Query pulses:	Darbeleri sorgula:
+Show pulses	Atımları göster
+Advanced pulses settings...	Gelişmiş atım ayarları...
+Query pulses:	Atımları sorgula:
 Voice report	Ses raporu (jitter, shimmer, HNR)
-Pulse listing	Darbe listesi
-Draw pulses to picture window:	Darbeleri çizim penceresine çiz:
-Draw visible pulses...	Görünen darbeleri çiz...
-Extract pulses to objects window:	Darbeleri nesneler penceresine çıkar:
-Extract visible pulses	Görünen darbeleri çıkar
+Pulse listing	Atım listesi
+Draw pulses to picture window:	Atımları çizim penceresine çiz:
+Draw visible pulses...	Görünen atımları çiz...
+Extract pulses to objects window:	Atımları nesneler penceresine çıkar:
+Extract visible pulses	Görünen atımları çıkar
 TextGrid settings...	TextGrid ayarları...
 Convert entire TextGrid to backslash trigraphs	Bütün TextGrid'i ters bölü kodlarına dönüştür
 Convert entire TextGrid to Unicode	Bütün TextGrid'i Unicode'a dönüştür
@@ -698,8 +698,8 @@ derived spectrogram	türetilmiş spektrogram
 derived formants	türetilmiş formantlar
 derived intensity	türetilmiş şiddet
 derived pitch	türetilmiş perde
-derived pulses	türetilmiş darbeler
-pitch derived from pulses	darbelerden türetilmiş perde
+derived pulses	türetilmiş atımlar
+pitch derived from pulses	atımlardan türetilmiş perde
 Total duration %f seconds	Toplam süre %f saniye
 Visible part %f seconds	Görünen bölüm %f saniye
 
@@ -740,7 +740,7 @@ Date	Tarih
 @CURSOR	İMLECİN
 @seconds	saniye
 Pitch:	Perde (F0):
-Pulses:	Glottal darbeler:
+Pulses:	Glottal atımlar:
 Voicing:	Ötümlülük:
 Jitter:	Jitter (frekans pertürbasyonu):
 Shimmer:	Shimmer (genlik pertürbasyonu):
@@ -751,7 +751,7 @@ Mean pitch	Ortalama perde
 Standard deviation	Standart sapma
 Minimum pitch	En düşük perde
 Maximum pitch	En yüksek perde
-Number of pulses	Darbe sayısı
+Number of pulses	Atım sayısı
 Number of periods	Periyot sayısı
 Mean period	Ortalama periyot
 Standard deviation of period	Periyodun standart sapması
@@ -1210,9 +1210,9 @@ To DTW...	DTW hesapla...
 To ParamCurve	ParamCurve oluştur
 ## Pitch
 Pitch help	Pitch yardımı
-Play pulses	Darbeleri çal
+Play pulses	Atımları çal
 Hum	Mırıltı olarak çal
-To Sound (pulses)	Sound oluştur (darbeler)
+To Sound (pulses)	Sound oluştur (atımlar)
 To Sound (hum)	Sound oluştur (mırıltı)
 To Sound (sine)...	Sound oluştur (sinüs)...
 Draw logarithmic...	Logaritmik çiz...
@@ -1275,7 +1275,7 @@ Down to FormantGrid	FormantGrid'e dönüştür
 To Matrix...	Matrix hesapla...
 ## PointProcess
 PointProcess help	PointProcess yardımı
-Play as pulse train	Darbe dizisi olarak çal
+Play as pulse train	Atım dizisi olarak çal
 Get number of points	Nokta sayısını al
 Get low index...	Alt sırayı al...
 Get high index...	Üst sırayı al...
@@ -1298,7 +1298,7 @@ Fill...	Doldur...
 Voice...	Ötümlü yap...
 To PitchTier...	PitchTier hesapla...
 To TextGrid (vuv)...	TextGrid oluştur (ötümlü/ötümsüz)...
-To Sound (pulse train)...	Sound oluştur (darbe dizisi)...
+To Sound (pulse train)...	Sound oluştur (atım dizisi)...
 To Sound (phonation)...	Sound oluştur (fonasyon)...
 Up to TextTier...	TextTier'a yükselt...
 Up to PitchTier...	PitchTier'a yükselt...
@@ -1372,7 +1372,7 @@ Play (LPC)	Çal (LPC)
 Get resynthesis (overlap-add)	Yeniden sentezi al (örtüşme ekleme)
 Get resynthesis (LPC)	Yeniden sentezi al (LPC)
 Extract original sound	Özgün sesi çıkar
-Extract pulses	Darbeleri çıkar
+Extract pulses	Atımları çıkar
 Extract pitch tier	Perde katmanını çıkar
 Extract duration tier	Süre katmanını çıkar
 Replace pitch tier?	Perde katmanını değiştir?

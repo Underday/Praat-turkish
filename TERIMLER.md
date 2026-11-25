@@ -39,7 +39,7 @@ Bu dosya Praat arayüzünün Türkçeye çevirisinde kullanılan terimleri ve ge
 | voice breaks | ses kırılmaları | |
 | voiced / voiceless | ötümlü / ötümsüz | Türkçe dilbilimde yerleşik. DKT'de "sesli/sessiz" de geçer, ancak "sesli" ünlü anlamıyla karışır |
 | vowel / consonant | ünlü / ünsüz | |
-| pulses (glottal pulses) | glottal darbeler, kısaca darbe | Praat'taki PointProcess nesnesi. Klinik yazındaki "glottal pulse" kullanımıyla örtüşüyor. Önceki karşılık "titreşim noktaları" idi. **Tartışmaya açık.** |
+| pulses (glottal pulses) | glottal atımlar, kısaca atım | Praat'taki PointProcess nesnesi. Ses tellerinin her titreşim döngüsündeki tek bir vuruşu anlatır. "Darbe"deki şiddet çağrışımını taşımadığı için seçildi, kalp atımını çağrıştırabilir. Önceki karşılıklar "titreşim noktaları" ve "glottal darbeler" idi. **Tartışmaya açık.** |
 | glottal | glottal | |
 | periodicity | periyodiklik | |
 | autocorrelation | otokorelasyon | |
@@ -121,7 +121,7 @@ Bu dosya Praat arayüzünün Türkçeye çevirisinde kullanılan terimleri ve ge
 
 Aşağıdakiler ve tablolarda "Tartışmaya açık" diye işaretlenenler için öneri ve itirazlar konu (issue) olarak açılabilir.
 
-- "pulses" için "glottal darbeler" seçildi (önceki karşılık "titreşim noktaları").
+- "pulses" için "glottal atımlar" seçildi (önceki karşılıklar "titreşim noktaları" ve "glottal darbeler").
 - jitter ve shimmer açıklamasında "pertürbasyon" seçildi (önceki karşılık "düzensizlik").
 
 - "pitch" için "perde (F0)" mi yoksa yalnızca "temel frekans" mı? Şimdilik menüde "Perde (F0)" kullanılıyor.
