@@ -4,6 +4,7 @@
 > - **İndirme ve kurulum:** [tanıtım sayfası](https://underday.github.io/Praat-turkish/)
 > - **Kaynaktan derleme, çeviri katmanı, katkı ve atıf:** [README_TR.md](https://github.com/Underday/Praat-turkish/blob/main/README_TR.md)
 > - **Terim kararları:** [TERIMLER.md](https://github.com/Underday/Praat-turkish/blob/main/TERIMLER.md)
+> - **Code signing policy** (Windows imzası ve gizlilik): [CODE_SIGNING_POLICY.md](https://github.com/Underday/Praat-turkish/blob/main/CODE_SIGNING_POLICY.md)
 >
 > Aşağıdaki metin Praat'ın kendi README dosyasının Türkçe çevirisidir. İngilizce asıl metin: [README.md](https://github.com/Underday/Praat-turkish/blob/main/README.md)
 
