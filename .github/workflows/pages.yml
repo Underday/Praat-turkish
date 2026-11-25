@@ -18,11 +18,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  yayimla:
+  # Yükleme ve yayın ayrı işlerde: aynı işte arka arkaya koşunca yayın adımı
+  # yeni yüklenen dosyaları henüz göremeyip "No artifacts" hatası verebiliyor.
+  hazirla:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       # Kaynak sayfada doctype ve head etiketleri yok. Pages için başına ekle.
@@ -32,5 +31,13 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
+
+  yayimla:
+    needs: hazirla
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - id: deployment
         uses: actions/deploy-pages@v4
