@@ -78,6 +78,8 @@ dl.araclar > div.grup { display: block; }
 .sag > footer { border-top: 1px solid var(--line); padding-top: 20px; display: grid; gap: 8px; font-size: 0.9rem; color: var(--muted); }
 .sag > footer p { margin: 0; }
 .hakkinda { display: grid; gap: 12px; max-width: 60ch; }
+.atif-kisa { margin-top: 14px; font-size: 0.9rem; color: var(--muted); }
+.kaynakca { font-family: var(--serif); font-size: 1.05rem; line-height: 1.5; padding: 12px 16px; border-left: 3px solid var(--vurgu); background: var(--kart); border-radius: 0 8px 8px 0; overflow-wrap: anywhere; }
 </style>
 
 <div class="sayfa">
@@ -129,6 +131,7 @@ dl.araclar > div.grup { display: block; }
       <p class="not" id="indir-not" hidden></p>
       <div class="digerleri" id="digerleri"></div>
     </div>
+    <p class="atif-kisa">Çalışmanızda kullandıysanız kaynak gösterin: <a href="https://doi.org/10.5281/zenodo.24525320">DOI 10.5281/zenodo.24525320</a> · <a href="#hakkinda">kaynakça satırı</a></p>
   </section>
 
   <section id="kurulum" aria-labelledby="kurulum-baslik">
@@ -209,6 +212,9 @@ dl.araclar > div.grup { display: block; }
       <h2 id="hakkinda-baslik">Hakkında</h2>
       <div class="hakkinda">
         <p>Türkçe arayüzü, terim sözlüğünü ve Türkçe araçları <a href="https://underday.github.io/">Abdullah Talha Korkmaz</a> (Underday) hazırladı. Ses ve konuşma alanında çalışan klinisyenler, öğrenciler ve araştırmacılar Praat'ı kendi dillerinde kullanabilsin diye.</p>
+        <p><b>Kaynak göstermek için</b> (APA):</p>
+        <p class="kaynakca">Korkmaz, A. T. (2026). <i>Praat Türkçe: Praat için Türkçe arayüz ve Türkçe araçlar</i> [Bilgisayar yazılımı]. Zenodo. <a href="https://doi.org/10.5281/zenodo.24525320">https://doi.org/10.5281/zenodo.24525320</a></p>
+        <p class="kucuk">Praat'ın kendisini de <a href="https://www.fon.hum.uva.nl/praat/manual/FAQ__How_to_cite_Praat.html">Praat'ın istediği biçimde</a> ayrıca kaynak gösterin.</p>
         <p>Terim seçimleri gerekçeleriyle birlikte depodaki <a href="https://github.com/Underday/Praat-turkish/blob/main/TERIMLER.md">terim listesinde</a>. Bir terime itirazınız ya da öneriniz varsa <a href="https://github.com/Underday/Praat-turkish/issues">sorun bildirim sayfasına</a> yazabilirsiniz.</p>
       </div>
     </section>
