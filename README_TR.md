@@ -2,7 +2,7 @@
 
 Bu depo, Praat'ın (konuşma analizi ve fonetik programı, https://praat.org) arayüzünü Türkçeye çevirmek için tutuluyor. Praat'ın kendi kaynak koduna çok küçük bir çeviri katmanı ekleniyor, çeviriler tek bir sözlük dosyasında duruyor.
 
-**İndirme:** hazır Windows ve Linux paketleri [Releases](https://github.com/Underday/Praat-turkish/releases/latest) sayfasında.
+**İndirme:** kurulum anlatımı ve indirme düğmesi [tanıtım sayfasında](https://underday.github.io/Praat-turkish/). Paketler [Releases](https://github.com/Underday/Praat-turkish/releases/latest) sayfasında da duruyor.
 
 ![Nesneler penceresi](ceviri/ekran/nesneler-penceresi.png)
 ![TextGrid düzenleyici](ceviri/ekran/textgrid-duzenleyici.png)
@@ -20,11 +20,11 @@ Bu depo, Praat'ın (konuşma analizi ve fonetik programı, https://praat.org) ar
 - Praat açılınca küçük bir pencere çeviriyi yapanı, çeviri sürümünü ve depoda yeni sürüm olup olmadığını gösterir. Denetim `curl` ile GitHub'daki son Release etiketine bakar (Linux ve macOS'ta, Windows 10 ve sonrasında `curl` hazır gelir). En fazla 4 saniye bekler. Bağlantı yoksa "Güncelleme denetlenemedi" yazar. "Yeni sürüm çıkana dek gösterme" seçilirse pencere yalnızca daha yeni bir sürüm çıkınca yeniden görünür. Script modunda (`--run`) pencere çıkmaz, `PRAAT_CEVIRI_ACILIS=0` ile tamamen kapatılır.
 - Sözlük dosyası kurulu değilse Praat tamamen İngilizce açılır. Tek bir açılış için çeviriyi kapatmak isterseniz `PRAAT_CEVIRI=0 ./praat` yeterli.
 
-Upstream koduna dokunulan yerler: `sys/` altındaki 10 Gui dosyasında `Melder_peek32to8 (x)` çağrıları `Melder_peek32to8 (Gui_tr (x))` hâline getirildi, `GuiP.h` bir satır `#include` aldı, `sys/Makefile` ve `sys/meson.build` yeni dosyayı tanıdı. Bu değişiklikler küçük olduğu için upstream güncellemeleri birleştirilirken çakışma riski düşük.
+Upstream koduna dokunulan yerler: `sys/` altındaki 10 Gui dosyasında `Melder_peek32to8 (x)` çağrıları `Melder_peek32to8 (Gui_tr (x))` hâline getirildi, `GuiP.h` bir satır `#include` aldı, `sys/Makefile` ve `sys/meson.build` yeni dosyayı tanıdı. `sys/praat.cpp` açılış penceresi ve programın yanındaki eklentiler için birkaç satır aldı. Bu değişiklikler küçük olduğu için upstream güncellemeleri birleştirilirken çakışma riski düşük.
 
 ## Kurulum (Linux)
 
-Hazır paket: [Releases](https://github.com/Underday/Praat-turkish/releases/latest) sayfasındaki `linux-x86_64.tar.gz` arşivi açılıp `./praat` çalıştırılır, eklenti için `./kur.sh`. Kaynaktan derlemek için:
+Hazır paket: [Releases](https://github.com/Underday/Praat-turkish/releases/latest) sayfasındaki `linux-x86_64.tar.gz` arşivi açılıp `./praat` çalıştırılır, eklenti paketle birlikte kendiliğinden yüklenir. Kaynaktan derlemek için:
 
 Gerekenler (Arch): `gtk3`, `libpulse`, `alsa-lib`, `jack2` (ya da `pipewire-jack`), `gcc`, `make`, `pkgconf`.
 Ubuntu ya da Debian için `HOW_TO_BUILD_ONE.md` dosyasındaki paket listesine bakın.
@@ -79,7 +79,7 @@ Praat'taki açılış penceresi en son Release etiketine bakar. Kullanıcılar y
 
 ## Türkçe araçlar eklentisi
 
-`ceviri/plugin_TurkceAraclar` klasöründe, Praat 7'nin kendi komutlarıyla yazılmış bir script paketi var. Linux'ta `kur.sh` kurar. Windows'ta zip'teki `kur.bat` eklentiyi `%APPDATA%\Praat` klasörüne kopyalar. Komutlar menülerde "⁺Türkçe araçlar" altında çıkar. Başlarındaki "⁺" işaretini Praat 7 kendisi koyuyor, eklentiyle gelen komutları böyle ayırt ediyor.
+`ceviri/plugin_TurkceAraclar` klasöründe, Praat 7'nin kendi komutlarıyla yazılmış bir script paketi var. Hazır paketlerde eklenti klasörü programın yanında durur ve Praat açılırken oradan kendiliğinden yüklenir (`sys/praat_ceviri.cpp`, `praat_ceviri_programEklentileri`). Aynı adlı eklenti tercih klasöründe de varsa programın yanındaki kullanılır. Kaynaktan derleyenler için `ceviri/kur.sh` eklentiyi `~/.config/praat` altına bağlar. Komutlar menülerde "⁺Türkçe araçlar" altında çıkar. Başlarındaki "⁺" işaretini Praat 7 kendisi koyuyor, eklentiyle gelen komutları böyle ayırt ediyor.
 
 | Nerede | Komut | Ne yapar |
 |---|---|---|
@@ -115,7 +115,7 @@ Bu depo ondan şu noktalarda ayrılıyor:
 | Praat'ın menüleri, diyalogları, düzenleyicisi | İngilizce kalıyor (New, View & Edit, OK) | Türkçe |
 | Bilgi penceresi çıktısı (ses raporu) | İngilizce, eklenen scriptlerin çıktısı Türkçe | Ekranda Türkçe, scriptlere giden metin İngilizce |
 | Praat sürümü | 5.3.57'ye bağlı, paket başka bir sürümle eklentilerin çalışmayabileceğini belirtiyor | Güncel sürüm (7.0.03), upstream güncellemeleri birleştirilebiliyor |
-| Kurulum | Ayar dosyalarını elle kopyalama | Tek sözlük dosyası ve `kur.sh` |
+| Kurulum | Ayar dosyalarını elle kopyalama | Zip'i açıp çalıştırmak, sözlük ve eklenti programın yanından yüklenir |
 | Terimler | Belgelenmemiş | `TERIMLER.md` ile gerekçeli |
 | Platform | Windows ve macOS | Linux ve Windows (Wine altında denendi) |
 

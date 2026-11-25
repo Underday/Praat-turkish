@@ -5,14 +5,13 @@ Praat Türkçe arayüz (Linux, x86_64)
 2. praat dosyasını çalıştırın: ./praat
    Arayüz Türkçe açılır.
 
-praat ve ceviri_tr.tsv aynı klasörde durmalı. Sözlük dosyası silinirse Praat İngilizce açılır.
+praat, ceviri_tr.tsv ve plugin_TurkceAraclar aynı klasörde durmalı. Sözlük dosyası silinirse Praat İngilizce açılır.
 
 Gerekenler: GTK 3, ALSA ya da PulseAudio (masaüstü dağıtımlarının çoğunda kurulu gelir).
 Ubuntu 22.04 üzerinde derlendi, daha yeni dağıtımlarda da çalışır.
 
-Türkçe araçlar eklentisi (isteğe bağlı): ./kur.sh komutunu çalıştırın, sonra Praat'ı
-yeniden açın. Eklenti ~/.config/praat/plugin_TurkceAraclar klasörüne kopyalanır.
-Komutlar Sound seçiliyken, Sound ve TextGrid seçiliyken ve Yeni menüsünde
+Türkçe araçlar eklentisi ayrıca kurulmaz. praat dosyasının yanındaki
+plugin_TurkceAraclar klasöründen kendiliğinden yüklenir. Komutlar Sound seçiliyken, Sound ve TextGrid seçiliyken ve Yeni menüsünde
 "Türkçe araçlar" altında görünür.
 
 İngilizceye geçmek için: Praat > Ayarlar > Arayüz dili... menüsünden "İngilizce" seçin,

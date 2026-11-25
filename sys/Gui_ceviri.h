@@ -12,6 +12,7 @@
  * Aranan yerler, sırayla:
  *    1. PRAAT_CEVIRI ortam değişkenindeki yol ("0" ya da "yok" ise çeviri kapalı)
  *    2. <tercih klasörü>/ceviri_tr.tsv   (Linux: ~/.config/praat/ceviri_tr.tsv)
+ *    3. programın kendi klasöründeki ceviri_tr.tsv
  * Dosya yoksa arayüz İngilizce kalır.
  *
  * PRAAT_CEVIRI_EKSIK=<dosya> verilirse, sözlükte bulunmayan her etiket
@@ -47,6 +48,11 @@ conststring32 Gui_trMetin (conststring32 metin);
 */
 bool Gui_ceviri_turkceMi ();
 void Gui_ceviri_turkceAyarla (bool turkce);
+
+/*
+	Çalışan programın (praat, Praat.exe) bulunduğu klasör. Bulunamazsa false.
+*/
+bool Gui_ceviri_programKlasoru (MelderFolder klasor);
 
 /*
 	Praat > Settings > Interface language... komutunu ekler (praat_ceviri.cpp).

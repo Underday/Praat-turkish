@@ -17,6 +17,43 @@
 	#include <unistd.h>
 #endif
 
+/*
+	Çalışan programın (praat, Praat.exe) bulunduğu klasör. Windows ve Linux'ta.
+*/
+bool Gui_ceviri_programKlasoru (MelderFolder klasor) {
+	#if defined (_WIN32)
+		WCHAR yol [MAX_PATH + 1];
+		const DWORD uzunluk = GetModuleFileNameW (nullptr, yol, MAX_PATH);
+		if (uzunluk == 0 || uzunluk >= MAX_PATH)
+			return false;
+		std::u32string tam;
+		for (DWORD i = 0; i < uzunluk; i ++)
+			tam += (char32) yol [i];   // klasör adlarında BMP dışı karakter beklenmiyor
+	#elif defined (linux)
+		char yol [4096];
+		const ssize_t uzunluk = readlink ("/proc/self/exe", yol, sizeof yol - 1);
+		if (uzunluk <= 0)
+			return false;
+		yol [uzunluk] = '\0';
+		std::u32string tam;
+		try {
+			autostring32 yol32 = Melder_8to32_e (yol);
+			tam = yol32.get ();
+		} catch (MelderError) {
+			Melder_clearError ();
+			return false;
+		}
+	#else
+		return false;
+		std::u32string tam;
+	#endif
+	const size_t ayirici = tam.find_last_of (U"/\\");
+	if (ayirici == std::u32string::npos)
+		return false;
+	Melder_pathToFolder (tam.substr (0, ayirici).c_str (), klasor);
+	return true;
+}
+
 namespace {
 
 	std::unordered_map <std::u32string, std::u32string> sozluk;
@@ -101,37 +138,10 @@ namespace {
 		Böylece Windows'ta zip açılıp Praat.exe çalıştırıldığında kurulum gerekmez.
 	*/
 	bool programKlasorundekiDosya (MelderFile dosya) {
-		#if defined (_WIN32)
-			WCHAR yol [MAX_PATH + 1];
-			const DWORD uzunluk = GetModuleFileNameW (nullptr, yol, MAX_PATH);
-			if (uzunluk == 0 || uzunluk >= MAX_PATH)
-				return false;
-			std::u32string tam;
-			for (DWORD i = 0; i < uzunluk; i ++)
-				tam += (char32) yol [i];   // klasör adlarında BMP dışı karakter beklenmiyor
-		#elif defined (linux)
-			char yol [4096];
-			const ssize_t uzunluk = readlink ("/proc/self/exe", yol, sizeof yol - 1);
-			if (uzunluk <= 0)
-				return false;
-			yol [uzunluk] = '\0';
-			std::u32string tam;
-			try {
-				autostring32 yol32 = Melder_8to32_e (yol);
-				tam = yol32.get ();
-			} catch (MelderError) {
-				Melder_clearError ();
-				return false;
-			}
-		#else
+		structMelderFolder klasor { };
+		if (! Gui_ceviri_programKlasoru (& klasor))
 			return false;
-			std::u32string tam;
-		#endif
-		const size_t ayirici = tam.find_last_of (U"/\\");
-		if (ayirici == std::u32string::npos)
-			return false;
-		const std::u32string klasor = tam.substr (0, ayirici + 1) + U"ceviri_tr.tsv";
-		Melder_pathToFile (klasor.c_str (), dosya);
+		MelderFolder_getFile (& klasor, U"ceviri_tr.tsv", dosya);
 		return MelderFile_exists (dosya);
 	}
 

@@ -11,12 +11,13 @@
 
 #include "praatP.h"
 #include "praatM.h"
+#include "praat_script.h"
 #include <vector>
 
 /*
 	Çeviri sürümü. Depoda yeni sürüm "tr-v0.2" biçiminde bir GitHub Release olarak yayımlanır.
 */
-#define CEVIRI_SURUM  U"0.1"
+#define CEVIRI_SURUM  U"0.2"
 #define CEVIRI_YAPAN  U"Underday"
 #define CEVIRI_EPOSTA  U"github.com/Underday"
 #define CEVIRI_DEPO_API  U"https://api.github.com/repos/Underday/Praat-turkish/releases/latest"
@@ -254,6 +255,50 @@ void praat_ceviri_acilis () {
 	if (ortam && str32equ (ortam, U"0"))
 		return;
 	Gui_addWorkProc ([] () { acilisPenceresiniGoster (); });
+}
+
+/*
+	Programın yanındaki eklentiler. Paketteki plugin_TurkceAraclar klasörü Praat.exe (ya da praat)
+	ile aynı klasörde durur, Praat açılırken buradan yüklenir. Kullanıcının kurulum yapması gerekmez.
+	Aynı adlı eklenti tercih klasöründe de varsa (eski kur.bat ya da kur.sh kurulumu) programın
+	yanındaki sürüm kullanılır, tercih klasöründeki atlanır (praat.cpp).
+*/
+bool praat_ceviri_programdaEklentiVar (conststring32 eklentiAdi) {
+	structMelderFolder programKlasoru { }, eklentiKlasoru { };
+	structMelderFile kurulum { };
+	if (! Gui_ceviri_programKlasoru (& programKlasoru))
+		return false;
+	MelderFolder_getSubfolder (& programKlasoru, eklentiAdi, & eklentiKlasoru);
+	MelderFolder_getFile (& eklentiKlasoru, U"setup.praat", & kurulum);
+	return MelderFile_readable (& kurulum);
+}
+
+void praat_ceviri_programEklentileri () {
+	structMelderFolder programKlasoru { };
+	if (! Gui_ceviri_programKlasoru (& programKlasoru))
+		return;
+	structMelderFile arama { };
+	MelderFolder_getFile (& programKlasoru, U"plugin_*", & arama);
+	try {
+		autoSTRVEC adlar = folderNames_STRVEC (MelderFile_peekPath (& arama));
+		for (integer i = 1; i <= adlar.size; i ++) {
+			structMelderFolder eklentiKlasoru { };
+			structMelderFile kurulum { };
+			MelderFolder_getSubfolder (& programKlasoru, adlar [i].get(), & eklentiKlasoru);
+			MelderFolder_getFile (& eklentiKlasoru, U"setup.praat", & kurulum);
+			if (! MelderFile_readable (& kurulum))
+				continue;
+			Melder_backgrounding = true;
+			try {
+				praat_executeScript_noGUI (& kurulum, false);
+			} catch (MelderError) {
+				Melder_flushError (Melder_upperCaseAppName(), U": plugin ", & kurulum, U" contains an error.");
+			}
+			Melder_backgrounding = false;
+		}
+	} catch (MelderError) {
+		Melder_clearError ();   // klasör okunamadı
+	}
 }
 
 /* End of file praat_ceviri.cpp */

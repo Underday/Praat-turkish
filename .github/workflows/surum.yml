@@ -64,7 +64,7 @@ jobs:
         AD="Praat-tr-${{ needs.surum.outputs.surum }}-win-x64"
         mkdir -p "dagitim/$AD"
         strip Praat.exe
-        cp Praat.exe ceviri/ceviri_tr.tsv ceviri/windows/BENIOKU.txt ceviri/windows/kur.bat "dagitim/$AD/"
+        cp Praat.exe ceviri/ceviri_tr.tsv ceviri/windows/BENIOKU.txt "dagitim/$AD/"
         cp -r ceviri/plugin_TurkceAraclar "dagitim/$AD/"
         (cd dagitim && zip -qr "$AD.zip" "$AD")
     - uses: actions/upload-artifact@v4
@@ -93,7 +93,7 @@ jobs:
         AD="Praat-tr-${{ needs.surum.outputs.surum }}-linux-x86_64"
         mkdir -p "dagitim/$AD"
         strip praat
-        cp praat ceviri/ceviri_tr.tsv ceviri/linux/BENIOKU.txt ceviri/linux/kur.sh "dagitim/$AD/"
+        cp praat ceviri/ceviri_tr.tsv ceviri/linux/BENIOKU.txt "dagitim/$AD/"
         cp -r ceviri/plugin_TurkceAraclar "dagitim/$AD/"
         (cd dagitim && tar -czf "$AD.tar.gz" "$AD")
     - uses: actions/upload-artifact@v4
@@ -117,8 +117,11 @@ jobs:
         cat > notlar.md <<NOT
         Praat ${{ needs.surum.outputs.praat }} üzerine Türkçe arayüz, sürüm ${{ needs.surum.outputs.surum }}.
 
-        - Windows: zip'i açıp Praat.exe dosyasını çalıştırın. Türkçe araçlar eklentisi için kur.bat.
-        - Linux (x86_64): arşivi açıp ./praat çalıştırın. Eklenti için ./kur.sh.
+        - Windows: zip'i bir klasöre çıkarıp Praat.exe dosyasını çalıştırın.
+        - Linux (x86_64): arşivi açıp ./praat çalıştırın.
+
+        Türkçe araçlar eklentisi paketle gelir, ayrıca kurulmaz.
+        Tanıtım ve kurulum: https://underday.github.io/Praat-turkish/
 
         Ayrıntılar: README_TR.md
         NOT

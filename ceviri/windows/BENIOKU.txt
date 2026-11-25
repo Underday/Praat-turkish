@@ -6,7 +6,7 @@ Kurulum gerekmez.
 1. Zip dosyasını bir klasöre açın.
 2. Praat.exe dosyasını çalıştırın. Arayüz Türkçe açılır.
 
-Praat.exe ve ceviri_tr.tsv aynı klasörde durmalı. Sözlük dosyası silinirse Praat İngilizce açılır.
+Praat.exe, ceviri_tr.tsv ve plugin_TurkceAraclar aynı klasörde durmalı. Sözlük dosyası silinirse Praat İngilizce açılır.
 
 İngilizceye geçmek için: Praat > Ayarlar > Arayüz dili... menüsünden "İngilizce" seçin,
 Praat'ı kapatıp yeniden açın. Türkçeye dönmek için İngilizce arayüzde
@@ -15,8 +15,10 @@ Praat > Settings > Interface language... menüsünden "Turkish" seçin.
 Program imzasız olduğu için Windows ilk açılışta "Windows bilgisayarınızı korudu"
 uyarısı verebilir. "Ek bilgi" bağlantısına, sonra "Yine de çalıştır" düğmesine tıklayın.
 
-Türkçe araçlar eklentisi (isteğe bağlı): kur.bat dosyasına çift tıklayın, sonra Praat'ı
-yeniden açın. Eklenti %APPDATA%\Praat\plugin_TurkceAraclar klasörüne kopyalanır.
+Türkçe araçlar eklentisi ayrıca kurulmaz. Praat.exe yanındaki plugin_TurkceAraclar
+klasöründen kendiliğinden yüklenir, bu klasörü de Praat.exe ile birlikte tutun.
+Daha önce kur.bat ile kurduysanız %APPDATA%\Praat\plugin_TurkceAraclar klasörünü
+silebilirsiniz, Praat yine de programın yanındaki yeni sürümü kullanır.
 Komutlar şuralarda görünür:
   Sound seçiliyken: Türkçe araçlar > Ses kalitesi raporu, Spektral eğim ölçüleri,
     Kepstrum grafiği (CPP)

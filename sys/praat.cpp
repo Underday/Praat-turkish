@@ -2093,6 +2093,8 @@ static void executeStartUpFile (MelderFolder startUpDirectory, conststring32 fil
 #endif
 
 void praat_ceviri_acilis ();   // sys/praat_ceviri.cpp
+bool praat_ceviri_programdaEklentiVar (conststring32 eklentiAdi);   // sys/praat_ceviri.cpp
+void praat_ceviri_programEklentileri ();   // sys/praat_ceviri.cpp
 
 void praat_run () {
 	trace (U"adding menus, second round");
@@ -2155,6 +2157,8 @@ void praat_run () {
 			for (integer i = 1; i <= pluginFolderNames7.size; i ++) {
 				structMelderFolder pluginFolder { };
 				structMelderFile plugin { };
+				if (praat_ceviri_programdaEklentiVar (pluginFolderNames7 [i].get()))
+					continue;   // Türkçe arayüz: programın yanındaki sürüm yüklenecek
 				MelderFolder_getSubfolder (Melder_preferencesFolder7(), pluginFolderNames7 [i].get(), & pluginFolder);
 				MelderFolder_getFile (& pluginFolder, U"setup.praat", & plugin);
 				if (MelderFile_readable (& plugin)) {
@@ -2192,6 +2196,8 @@ void praat_run () {
 						MelderFolder_peekPath (Melder_preferencesFolder7()), U"” and in “", MelderFolder_peekPath (Melder_preferencesFolder5()),
 						U"”; only the former is installed."
 					);
+				} else if (praat_ceviri_programdaEklentiVar (pluginFolderNames5 [i].get())) {
+					;   // Türkçe arayüz: programın yanındaki sürüm yüklenecek
 				} else {
 					structMelderFolder pluginFolder { };
 					structMelderFile plugin { };
@@ -2212,6 +2218,8 @@ void praat_run () {
 			Melder_clearError ();   // in case folderNames_STRVEC() threw an error
 		}
 	}
+	if (! praatP.ignorePlugins)
+		praat_ceviri_programEklentileri ();   // Türkçe arayüz: programın yanındaki plugin_* klasörleri
 
 	/*
 		Check the locale, to ensure identical behaviour on all computers.
