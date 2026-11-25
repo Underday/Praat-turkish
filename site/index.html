@@ -1,0 +1,281 @@
+<title>Praat Türkçe</title>
+<meta name="description" content="Ses analizi programı Praat'ın Türkçe menülü sürümü. Ücretsiz. Windows ve Linux için indirin.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="hece.css">
+<style>
+/* Tanıtım ve indirme sayfası: Hece tasarım dili, tek sütun. Üstte küçük prosedürel resim (spektrogram), sonra indirme, kurulum adımları, görüntüler, araçlar, sorular. */
+:root { --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; }
+[hidden] { display: none !important; }
+
+/* İki sütunlu Hece düzeni hece.css'te. Burada yalnızca bu sayfanın ekleri. */
+.sol-ic { gap: 28px; padding-top: 40px; }
+.sol-ic > .geri { font-size: 0.78rem; letter-spacing: 0.12em; margin-bottom: -4px; }
+.ad { font-size: clamp(2.6rem, 5vw, 3.8rem); }
+.yapan { font-size: 0.9rem; color: var(--muted); margin-top: 6px; }
+.yapan a { color: var(--fg); font-weight: 500; }
+.sag { gap: 88px; }
+
+section > h2 { margin-bottom: 18px; }
+.kucuk { font-size: 0.9rem; color: var(--muted); margin: 0; }
+code, kbd { font-family: var(--mono); font-size: 0.88em; }
+kbd { border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: 0 5px; background: var(--kart); }
+
+/* İndirme kutusu */
+.indir { border: 1px solid var(--line); border-radius: 12px; background: var(--kart); padding: 24px; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 14px 28px; align-items: center; }
+.indir > :not(.surum) { grid-column: 2; }
+.surum { grid-row: span 3; font-family: var(--serif); font-weight: 300; font-size: clamp(3.2rem, 7vw, 4.6rem); line-height: 0.9; letter-spacing: -0.03em; color: var(--metin-vurgu); font-variant-numeric: lining-nums; }
+.surum small { display: block; font-family: var(--sans); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+@media (max-width: 520px) { .indir { grid-template-columns: minmax(0, 1fr); } .indir > :not(.surum) { grid-column: 1; } .surum { grid-row: auto; } }
+.indir-ust { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.btn { font: inherit; font-size: 0.95rem; padding: 8px 16px; border-radius: 99px; border: 1px solid var(--line); background: transparent; color: var(--fg); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+.btn:hover { border-color: var(--fg); }
+.btn.ana { font-size: 1.05rem; font-weight: 600; padding: 12px 22px; border-color: var(--fg); background: var(--fg); color: var(--bg); }
+.btn.ana:hover { background: var(--metin-vurgu); border-color: var(--metin-vurgu); }
+.btn:focus-visible, summary:focus-visible, a:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 2px; }
+.bilgi { color: var(--muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+.digerleri { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 0.9rem; color: var(--muted); }
+.not { border-left: 3px solid var(--vurgu); padding: 2px 0 2px 12px; font-size: 0.92rem; margin: 0; }
+
+/* Adımlar */
+ol.adimlar { list-style: none; margin: 0; padding: 0; counter-reset: adim; display: grid; gap: 0; border-top: 1px solid var(--line); }
+ol.adimlar > li { counter-increment: adim; display: grid; grid-template-columns: 2.4em minmax(0, 1fr); gap: 4px 14px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+ol.adimlar > li::before { content: counter(adim); font-family: var(--serif); font-weight: 600; font-size: 1.6rem; line-height: 1; color: var(--metin-vurgu); grid-row: span 2; }
+ol.adimlar b { font-weight: 600; }
+ol.adimlar p { margin: 0; color: var(--muted); font-size: 0.94rem; grid-column: 2; }
+.sekmeler { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+.sekmeler button[aria-selected="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+
+/* Görüntüler */
+.goruntuler { display: grid; gap: 22px; }
+.goruntuler figure { margin: 0; display: grid; gap: 8px; }
+.goruntuler img { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--line); display: block; background: #fff; }
+.iki { align-items: end; }
+.goruntuler figcaption { font-size: 0.9rem; color: var(--muted); }
+.iki { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 600px), (min-width: 861px) and (max-width: 1100px) { .iki { grid-template-columns: 1fr; } }
+
+/* Araçlar */
+dl.araclar { margin: 0; border-top: 1px solid var(--line); }
+dl.araclar > div { display: grid; grid-template-columns: minmax(0, 15em) minmax(0, 1fr); gap: 4px 20px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+dl.araclar dt { font-weight: 600; }
+dl.araclar dd { margin: 0; color: var(--muted); font-size: 0.94rem; }
+dl.araclar > div.grup { display: block; }
+.grup { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 18px 0 6px; }
+@media (max-width: 600px) { dl.araclar > div { grid-template-columns: 1fr; } }
+
+/* Sorular */
+.sorular details { border-bottom: 1px solid var(--line); }
+.sorular details:first-child { border-top: 1px solid var(--line); }
+.sorular summary { cursor: pointer; padding: 14px 0; font-weight: 500; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+.sorular summary::-webkit-details-marker { display: none; }
+.sorular summary::after { content: "+"; color: var(--metin-vurgu); font-weight: 600; }
+.sorular details[open] summary::after { content: "−"; }
+.sorular summary:hover { color: var(--metin-vurgu); }
+.sorular .cevap { padding: 0 0 16px; color: var(--muted); display: grid; gap: 8px; }
+.sorular .cevap p { margin: 0; }
+
+.sag > footer { border-top: 1px solid var(--line); padding-top: 20px; display: grid; gap: 8px; font-size: 0.9rem; color: var(--muted); }
+.sag > footer p { margin: 0; }
+.hakkinda { display: grid; gap: 12px; max-width: 60ch; }
+</style>
+
+<div class="sayfa">
+
+  <aside class="sol">
+    <div class="sol-ic">
+      <a class="geri" href="https://underday.github.io/">← underday.github.io</a>
+      <header>
+        <h1 class="ad">Praat<br>Türkçe</h1>
+        <p class="unvan">Ses ve konuşma analizi programı Praat, Türkçe menülerle. Ücretsiz.</p>
+        <p class="yapan">Türkçe arayüz ve araçlar: <a href="https://underday.github.io/">Abdullah Talha Korkmaz</a> (Underday)</p>
+      </header>
+
+      <nav class="menu" aria-label="Bölümler">
+        <a href="#indir">İndir</a>
+        <a href="#kurulum">Kurulum</a>
+        <a href="#goruntuler">Neye benziyor</a>
+        <a href="#araclar">Türkçe araçlar</a>
+        <a href="#sorular">Sık sorulanlar</a>
+        <a href="#hakkinda">Hakkında</a>
+      </nav>
+
+      <figure class="resim">
+        <svg id="resim" viewBox="0 0 400 400" role="img" aria-label="Rastgele renkli bir şekil ve üzerinde spektrogramdaki formant izlerine benzeyen çizgiler. Yenilemek için tıklayın."></svg>
+        <figcaption><button type="button" class="yenile" id="yenile"><span class="yenile-ok" aria-hidden="true">↻</span> Başka bir tane çiz</button></figcaption>
+      </figure>
+
+      <div class="alt-satir">
+        <nav class="baglantilar" aria-label="Bağlantılar">
+          <a href="https://github.com/Underday/Praat-turkish">GitHub</a>
+          <a href="https://www.praat.org">praat.org</a>
+        </nav>
+        <button class="tema" id="tema" type="button">Tema: sistem</button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="sag">
+    <p class="acilis">Aynı Praat, aynı ölçümler. <b>Menüler, pencereler ve ses raporu</b> artık Türkçe. İndirip klasöre çıkarmanız yeterli.</p>
+
+  <section id="indir" aria-labelledby="indir-baslik">
+    <h2 id="indir-baslik">İndir</h2>
+    <div class="indir">
+      <div class="surum" aria-hidden="true"><small>Sürüm</small><span id="surum-no">…</span></div>
+      <div class="indir-ust">
+        <a class="btn ana" id="indir-ana" href="https://github.com/Underday/Praat-turkish/releases/latest">İndirme sayfası</a>
+        <span class="bilgi" id="indir-bilgi">Son sürüm bilgisi alınıyor...</span>
+      </div>
+      <p class="not" id="indir-not" hidden></p>
+      <div class="digerleri" id="digerleri"></div>
+    </div>
+  </section>
+
+  <section id="kurulum" aria-labelledby="kurulum-baslik">
+    <h2 id="kurulum-baslik">Kurulum</h2>
+    <div class="sekmeler" role="tablist" aria-label="İşletim sistemi">
+      <button class="btn" type="button" role="tab" id="sekme-win" aria-controls="adim-win" aria-selected="true">Windows</button>
+      <button class="btn" type="button" role="tab" id="sekme-linux" aria-controls="adim-linux" aria-selected="false">Linux</button>
+    </div>
+
+    <ol class="adimlar" id="adim-win" role="tabpanel" aria-labelledby="sekme-win">
+      <li><b>Zip dosyasını indirin.</b><p>Yukarıdaki düğme. Dosya yaklaşık 50 MB, genellikle "İndirilenler" klasörüne iner.</p></li>
+      <li><b>Zip'i klasöre çıkarın.</b><p>Dosyaya sağ tıklayın, <b>Tümünü ayıkla</b>'yı seçin. Zip'in içinden doğrudan açarsanız Praat sözlüğü bulamaz ve İngilizce açılır.</p></li>
+      <li><b>Praat.exe'ye çift tıklayın.</b><p>Praat Türkçe açılır, aşağıdaki Türkçe araçlar da menülerde hazır gelir. Programı başka bir yere almak isterseniz klasörün tamamını taşıyın, yalnızca Praat.exe'yi değil. Masaüstüne kısayol için Praat.exe'ye sağ tıklayıp <b>Kısayol oluştur</b>'u seçin.</p></li>
+      <li><b>Windows uyarı verirse.</b><p>"Windows bilgisayarınızı korudu" yazısı çıkabilir. Program imzasız olduğu için böyle. <b>Ek bilgi</b>'ye, sonra <b>Yine de çalıştır</b>'a tıklayın. Bu yalnızca ilk açılışta sorulur.</p></li>
+    </ol>
+
+    <ol class="adimlar" id="adim-linux" role="tabpanel" aria-labelledby="sekme-linux" hidden>
+      <li><b>Arşivi indirin.</b><p>Linux (x86_64) için <code>.tar.gz</code> dosyası.</p></li>
+      <li><b>Açın.</b><p>Dosya yöneticisinde "Buraya çıkar" ya da terminalde <code>tar xzf Praat-tr-*.tar.gz</code></p></li>
+      <li><b>Çalıştırın.</b><p>Klasörde <code>./praat</code>. Türkçe araçlar menülerde hazır gelir.</p></li>
+    </ol>
+  </section>
+
+  <section id="goruntuler" aria-labelledby="goruntu-baslik">
+    <h2 id="goruntu-baslik">Neye benziyor</h2>
+    <div class="goruntuler">
+      <figure>
+        <img src="ekran/textgrid-duzenleyici.png" width="1226" height="642" loading="lazy" alt="Türkçe menülü TextGrid düzenleyicisi: dalga biçimi, spektrogram ve etiket katmanları.">
+        <figcaption>Ses ve TextGrid düzenleyicisi. Menüler, düğmeler ve süre çubukları Türkçe.</figcaption>
+      </figure>
+      <div class="iki">
+        <figure>
+          <img src="ekran/nesneler-penceresi.png" width="572" height="789" loading="lazy" alt="Türkçe Praat nesneler penceresi.">
+          <figcaption>Nesneler penceresi</figcaption>
+        </figure>
+        <figure>
+          <img src="ekran/pitch-diyalogu.png" width="612" height="789" loading="lazy" alt="Türkçe perde (pitch) hesaplama ayarları penceresi.">
+          <figcaption>Perde hesaplama ayarları</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="araclar" aria-labelledby="araclar-baslik">
+    <h2 id="araclar-baslik">Türkçe araçlar</h2>
+    <p class="kucuk" style="margin-bottom:14px">Sık yapılan ölçümler için hazır komutlar. Programla birlikte gelir, ayrıca kurulmaz. Menülerde <b>⁺Türkçe araçlar</b> başlığı altında çıkar. Değerler Praat'ın kendi ölçümleridir, normatif eşik gösterilmez.</p>
+    <dl class="araclar">
+      <div class="grup">Bir ses kaydı seçiliyken</div>
+      <div><dt>Ses kalitesi raporu</dt><dd>Perde istatistikleri, jitter, shimmer, HNR ve CPPS tek pencerede. İsterseniz CSV olarak kaydeder.</dd></div>
+      <div><dt>Spektral eğim ölçüleri</dt><dd>H1-H2, H1-A1, H1-A3, LTAS eğimi, alfa oranı.</dd></div>
+      <div><dt>Kepstrum grafiği (CPP)</dt><dd>Seçilen anın kepstrumunu çizer, CPP'yi işaretler ve bütün sesin CPPS değerini verir.</dd></div>
+      <div class="grup">Ses kaydı ve TextGrid birlikte seçiliyken</div>
+      <div><dt>Etiketli aralıkları ölç</dt><dd>Her etiketli bölüm için süre, perde, şiddet, F1 F2 F3. Sonuç CSV tablosu.</dd></div>
+      <div><dt>Ünlü grafiği (F1-F2)</dt><dd>Etiketli ünlüleri F1-F2 düzleminde çizer.</dd></div>
+      <div><dt>Etiketli aralıkları WAV olarak kaydet</dt><dd>Her etiketli bölümü ayrı ses dosyasına böler.</dd></div>
+      <div class="grup">Yeni menüsünde, bir klasörün tamamı için</div>
+      <div><dt>Klasörün ses kalitesi</dt><dd>Klasördeki bütün kayıtlar için tek tabloda ses kalitesi ölçüleri.</dd></div>
+      <div><dt>Klasörü ölç</dt><dd>TextGrid varsa etiketli bölümleri, yoksa kaydın tamamını ölçer.</dd></div>
+      <div><dt>Klasörün duraklama analizi</dt><dd>Duraklama sayısı ve süresi, konuşma oranı.</dd></div>
+      <div><dt>Klasörü dönüştür</dt><dd>Tek kanala indirme, örnekleme hızı değiştirme, süzgeç, ses düzeyi ayarı.</dd></div>
+    </dl>
+  </section>
+
+  <section id="sorular" class="sorular" aria-labelledby="soru-baslik">
+    <h2 id="soru-baslik">Sık sorulanlar</h2>
+    <details><summary>Ücretli mi?</summary><div class="cevap"><p>Hayır. Praat da bu Türkçe sürüm de ücretsiz ve açık kaynaklı (GPL lisansı).</p></div></details>
+    <details><summary>Ölçüm sonuçları İngilizce Praat'la aynı mı?</summary><div class="cevap"><p>Evet. Yalnızca ekrandaki yazılar çevrildi, hesaplama kodu Praat'ın kendisi. Aynı kayıtta aynı ayarlarla aynı değerleri verir.</p></div></details>
+    <details><summary>İngilizceye nasıl dönerim?</summary><div class="cevap"><p>Nesneler penceresinde <b>Praat › Ayarlar › Arayüz dili...</b> menüsünden "İngilizce"yi seçin ve Praat'ı yeniden açın. Türkçeye dönmek için İngilizce arayüzde <b>Praat › Settings › Interface language...</b> menüsünden "Turkish".</p></div></details>
+    <details><summary>Bilgisayarımdaki eski Praat'ı silmem gerekir mi?</summary><div class="cevap"><p>Hayır. Bu sürüm kendi klasöründen çalışır, kurulu Praat'ı değiştirmez. İkisini yan yana kullanabilirsiniz.</p></div></details>
+    <details><summary>Hazır scriptlerim çalışır mı?</summary><div class="cevap"><p>Evet. Komutların iç adları İngilizce kaldı, <code>To Pitch...</code> gibi script satırları Türkçe arayüzde de aynen çalışır.</p></div></details>
+    <details><summary>Mac'te kullanabilir miyim?</summary><div class="cevap"><p>Henüz değil. Şimdilik Windows ve Linux sürümü var. Mac'te İngilizce Praat'ı <a href="https://www.praat.org">praat.org</a> adresinden indirebilirsiniz.</p></div></details>
+    <details><summary>Yeni sürüm çıktığını nasıl anlarım?</summary><div class="cevap"><p>Praat açılırken küçük bir pencere yeni sürüm olup olmadığını söyler. Yeni sürümü bu sayfadan indirip eski klasörün yerine koymanız yeterli.</p></div></details>
+    <details><summary>Neler henüz İngilizce?</summary><div class="cevap"><p>Grafik eksenlerindeki yazılar, hata mesajları ve Praat'ın yardım sayfaları. Menüler, ayar pencereleri, düzenleyici ve Bilgi penceresindeki ses raporu Türkçe.</p></div></details>
+    <details><summary>Bir hata buldum ya da bir çeviri yanlış</summary><div class="cevap"><p>GitHub hesabınız varsa <a href="https://github.com/Underday/Praat-turkish/issues">sorun bildirim sayfasına</a> yazabilirsiniz. Ekran görüntüsü eklemek çok yardımcı olur.</p></div></details>
+  </section>
+
+    <section id="hakkinda" aria-labelledby="hakkinda-baslik">
+      <h2 id="hakkinda-baslik">Hakkında</h2>
+      <div class="hakkinda">
+        <p>Türkçe arayüzü, terim sözlüğünü ve Türkçe araçları <a href="https://underday.github.io/">Abdullah Talha Korkmaz</a> (Underday) hazırladı. Ses ve konuşma alanında çalışan klinisyenler, öğrenciler ve araştırmacılar Praat'ı kendi dillerinde kullanabilsin diye.</p>
+        <p>Terim seçimleri gerekçeleriyle birlikte depodaki <a href="https://github.com/Underday/Praat-turkish/blob/main/TERIMLER.md">terim listesinde</a>. Bir terime itirazınız ya da öneriniz varsa <a href="https://github.com/Underday/Praat-turkish/issues">sorun bildirim sayfasına</a> yazabilirsiniz.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Praat, Paul Boersma ve David Weenink tarafından geliştirilir: <a href="https://www.praat.org">praat.org</a>. Bu sayfa onun Türkçe arayüzlü bir sürümünü dağıtır, resmî Praat sürümü değildir.</p>
+      <p>Türkçe arayüz: <a href="https://underday.github.io/">Abdullah Talha Korkmaz</a> (Underday), 2026. Kaynak kodu ve teknik ayrıntılar <a href="https://github.com/Underday/Praat-turkish">GitHub deposunda</a>, GPL lisansıyla.</p>
+    </footer>
+  </main>
+
+</div>
+
+<script src="hece-resim.js"></script>
+<script>
+HeceResim.bagla(document.getElementById("resim"), document.getElementById("yenile"), { motif: "spektrogram" });
+
+// Kurulum sekmeleri
+const sekmeler = { win: [document.getElementById("sekme-win"), document.getElementById("adim-win")], linux: [document.getElementById("sekme-linux"), document.getElementById("adim-linux")] };
+function sekmeSec(ad) {
+  for (const [k, [dugme, panel]] of Object.entries(sekmeler)) { const acik = k === ad; dugme.setAttribute("aria-selected", acik); panel.hidden = !acik; }
+}
+for (const [k, [dugme]] of Object.entries(sekmeler)) dugme.addEventListener("click", () => sekmeSec(k));
+
+// İşletim sistemini tahmin et ve son sürümü GitHub'dan al
+(function () {
+  const DEPO = "Underday/Praat-turkish";
+  const SAYFA = `https://github.com/${DEPO}/releases/latest`;
+  const ua = navigator.userAgent, plat = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || "";
+  const sistem = /android|iphone|ipad|ipod/i.test(ua) ? "mobil"
+    : /win/i.test(plat) || /windows/i.test(ua) ? "win"
+    : /mac/i.test(plat) || /mac os/i.test(ua) ? "mac"
+    : /linux/i.test(plat) || /linux|x11/i.test(ua) ? "linux" : "win";
+  if (sistem === "linux") sekmeSec("linux");
+
+  const ana = document.getElementById("indir-ana"), bilgi = document.getElementById("indir-bilgi");
+  const not = document.getElementById("indir-not"), digerleri = document.getElementById("digerleri");
+  const AD = { win: "Windows", linux: "Linux" };
+  const notYaz = t => { not.textContent = t; not.hidden = false; };
+  if (sistem === "mac") notYaz("Mac sürümü henüz yok. Windows ya da Linux kullanan bir bilgisayardan indirebilirsiniz.");
+  if (sistem === "mobil") notYaz("Praat telefonda çalışmaz. Bu sayfayı bilgisayarınızdan açın.");
+
+  const mb = b => (b / 1048576).toLocaleString("tr-TR", { maximumFractionDigits: 0 }) + " MB";
+  const tarih = s => new Date(s).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
+
+  fetch(`https://api.github.com/repos/${DEPO}/releases/latest`, { headers: { Accept: "application/vnd.github+json" } })
+    .then(y => { if (!y.ok) throw new Error(y.status); return y.json(); })
+    .then(s => {
+      const surum = s.tag_name.replace(/^tr-v/, "");
+      const dosya = { win: s.assets.find(a => /win.*\.zip$/i.test(a.name)), linux: s.assets.find(a => /linux.*\.tar\.gz$/i.test(a.name)) };
+      const birincil = dosya[sistem] ? sistem : (sistem === "linux" ? "linux" : "win");
+      const d = dosya[birincil];
+      if (!d) throw new Error("dosya yok");
+      ana.href = d.browser_download_url;
+      ana.textContent = `${AD[birincil]} için indir`;
+      bilgi.textContent = `${mb(d.size)} · ${tarih(s.published_at)}`;
+      document.getElementById("surum-no").textContent = surum;
+      const diger = Object.keys(dosya).filter(k => k !== birincil && dosya[k]);
+      digerleri.textContent = "";
+      if (diger.length) digerleri.append("Başka bir sistem:");
+      diger.forEach(k => { const a = document.createElement("a"); a.className = "btn"; a.href = dosya[k].browser_download_url; a.textContent = `${AD[k]} (${mb(dosya[k].size)})`; digerleri.append(a); });
+      const tum = document.createElement("a"); tum.href = SAYFA; tum.textContent = "Bütün dosyalar"; digerleri.append(tum);
+    })
+    .catch(() => {
+      ana.href = SAYFA; ana.textContent = "İndirme sayfasına git";
+      document.querySelector(".surum").hidden = true;
+      bilgi.textContent = "Açılan sayfada, Assets başlığı altındaki win-x64.zip (Windows) ya da linux-x86_64.tar.gz (Linux) dosyasına tıklayın.";
+    });
+})();
+</script>
+<script src="hece-tema.js"></script>

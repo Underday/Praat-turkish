@@ -1,0 +1,36 @@
+# Tanıtım ve indirme sayfası (site/) GitHub Pages'e yüklenir: https://underday.github.io/Praat-turkish/
+# İndirme düğmesi son Release'i sayfa açılırken GitHub'dan okur, yeni sürümde sayfayı yeniden yayımlamak gerekmez.
+name: Sayfa
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ "site/**", ".github/workflows/pages.yml" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  yayimla:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      # Kaynak sayfa Claude Artifact biçiminde (başlık etiketleri yok). Pages için başına ekle.
+      - name: Sayfa başlığını ekle
+        run: sed -i '1i <!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">' site/index.html
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4
