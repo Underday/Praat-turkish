@@ -1,6 +1,6 @@
 # Praat Türkçe arayüz
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24525320.svg)](https://doi.org/10.5281/zenodo.24525320) [![Son sürüm](https://img.shields.io/github/v/release/Underday/Praat-turkish?label=s%C3%BCr%C3%BCm)](https://underday.github.io/Praat-turkish/)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.24525320-2f5bff)](https://doi.org/10.5281/zenodo.24525320) [![Sürüm](https://img.shields.io/badge/dynamic/yaml?url=https%3A%2F%2Fraw.githubusercontent.com%2FUnderday%2FPraat-turkish%2Fmain%2FCITATION.cff&query=%24.version&label=s%C3%BCr%C3%BCm&color=12b886)](https://underday.github.io/Praat-turkish/) [![Lisans](https://img.shields.io/badge/lisans-GPL--3.0-8c5cff)](https://github.com/Underday/Praat-turkish/blob/main/LICENSE)
 
 Bu depo, Praat'ın (konuşma analizi ve fonetik programı, https://praat.org) arayüzünü Türkçeye çevirmek için tutuluyor. Praat'ın kendi kaynak koduna çok küçük bir çeviri katmanı ekleniyor, çeviriler tek bir sözlük dosyasında duruyor.
 
