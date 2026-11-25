@@ -1,6 +1,8 @@
 Praat Türkçe arayüz (Windows)
 =============================
 
+Praat 7.0.03'ün değiştirilmiş sürümüdür (Kasım 2026). Resmî Praat değildir.
+
 Kurulum gerekmez.
 
 1. Zip dosyasını bir klasöre açın.
@@ -30,4 +32,4 @@ Komutlar şuralarda görünür:
 Scriptler İngilizce komut adlarıyla çalışmaya devam eder.
 Terimler ve ayrıntılar için: https://github.com/Underday/Praat-turkish (README_TR.md, TERIMLER.md)
 
-Praat: Paul Boersma ve David Weenink, https://www.praat.org (GPL lisansı).
+Praat: Paul Boersma ve David Weenink, https://www.praat.org (GPL 3 ya da sonrası, lisans metni COPYING dosyasında).

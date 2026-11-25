@@ -2,6 +2,8 @@
 
 Bu depo, Praat'ın (konuşma analizi ve fonetik programı, https://praat.org) arayüzünü Türkçeye çevirmek için tutuluyor. Praat'ın kendi kaynak koduna çok küçük bir çeviri katmanı ekleniyor, çeviriler tek bir sözlük dosyasında duruyor.
 
+**Praat 7.0.03'ün değiştirilmiş sürümüdür (Kasım 2026). Resmî Praat değildir.** Praat'ın kendisi Paul Boersma ve David Weenink tarafından geliştirilir. Bu sürümü kullanan çalışmalarda Praat'ı da [kendi istediği biçimde](https://www.fon.hum.uva.nl/praat/manual/FAQ__How_to_cite_Praat.html) kaynak gösterin.
+
 **İndirme:** kurulum anlatımı ve indirme düğmesi [tanıtım sayfasında](https://underday.github.io/Praat-turkish/). Paketler [Releases](https://github.com/Underday/Praat-turkish/releases/latest) sayfasında da duruyor.
 
 ![Nesneler penceresi](ceviri/ekran/nesneler-penceresi.png)
@@ -55,9 +57,9 @@ Windows sürümü şimdiye kadar yalnızca Wine altında denendi.
 
 ## Sürüm yayımlama
 
-1. `sys/praat_ceviri.cpp` içindeki `CEVIRI_SURUM` değeri artırılır (örnek: `0.2`) ve commit edilir.
+1. `sys/praat_ceviri.cpp` içindeki `CEVIRI_SURUM` değeri artırılır (örnek: `0.2`). `CITATION.cff` içindeki `version` ve `date-released` da güncellenir, sonra commit edilir.
 2. Aynı sürümle etiket push edilir: `git tag tr-v0.2 && git push origin tr-v0.2`.
-3. `.github/workflows/surum.yml` Windows (MSYS2 UCRT64) ve Linux (Ubuntu 22.04) paketlerini derler, script modunda sınar ve "Praat Türkçe 0.2" adıyla bir GitHub Release açar. Etiket koddaki sürümle tutmazsa iş akışı durur.
+3. `.github/workflows/surum.yml` Windows (MSYS2 UCRT64) ve Linux (Ubuntu 22.04) paketlerini derler, script modunda sınar ve "Praat Türkçe 0.2" adıyla bir GitHub Release açar. Etiket koddaki sürümle ya da `CITATION.cff` sürümüyle tutmazsa iş akışı durur. Depo Zenodo'ya bağlı olduğu için her Release bir DOI alır.
 
 Praat'taki açılış penceresi en son Release etiketine bakar. Kullanıcılar yeni sürümü buradan öğrenir.
 
@@ -133,4 +135,4 @@ Kaynak: Kılıç, M. A. (2014). Özelleştirilmiş Praat programı ile uygulama.
 
 ## Lisans
 
-Praat GPL lisanslıdır (`README.md`). Bu depodaki çeviri katmanı ve sözlük de GPL 3 ya da sonrası ile dağıtılır.
+Praat GPL lisanslıdır (`README.md`). Bu depodaki çeviri katmanı ve sözlük de GPL 3 ya da sonrası ile dağıtılır. Lisans metni kök dizindeki `LICENSE` dosyasında, hazır paketlerde `COPYING` olarak bulunur.

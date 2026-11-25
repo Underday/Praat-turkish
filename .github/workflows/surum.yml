@@ -31,6 +31,12 @@ jobs:
           echo "Etiket ${GITHUB_REF_NAME}, koddaki sürüm $SURUM (beklenen etiket tr-v$SURUM)."
           exit 1
         fi
+        # Zenodo atıf bilgisini CITATION.cff'ten alır, sürüm orada da aynı olmalı.
+        ATIF=$(grep -m1 '^version:' CITATION.cff | sed 's/version: *"\{0,1\}\([^"]*\)"\{0,1\}/\1/')
+        if [ "$ATIF" != "$SURUM" ]; then
+          echo "CITATION.cff sürümü $ATIF, koddaki sürüm $SURUM. İkisi aynı olmalı."
+          exit 1
+        fi
 
   windows:
     needs: surum
@@ -65,6 +71,7 @@ jobs:
         mkdir -p "dagitim/$AD"
         strip Praat.exe
         cp Praat.exe ceviri/ceviri_tr.tsv ceviri/windows/BENIOKU.txt "dagitim/$AD/"
+        cp main/gpl-3.0.txt "dagitim/$AD/COPYING.txt"
         cp -r ceviri/plugin_TurkceAraclar "dagitim/$AD/"
         (cd dagitim && zip -qr "$AD.zip" "$AD")
     - uses: actions/upload-artifact@v4
@@ -94,6 +101,7 @@ jobs:
         mkdir -p "dagitim/$AD"
         strip praat
         cp praat ceviri/ceviri_tr.tsv ceviri/linux/BENIOKU.txt "dagitim/$AD/"
+        cp main/gpl-3.0.txt "dagitim/$AD/COPYING"
         cp -r ceviri/plugin_TurkceAraclar "dagitim/$AD/"
         (cd dagitim && tar -czf "$AD.tar.gz" "$AD")
     - uses: actions/upload-artifact@v4

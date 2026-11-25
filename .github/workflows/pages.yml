@@ -25,7 +25,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      # Kaynak sayfa Claude Artifact biçiminde (başlık etiketleri yok). Pages için başına ekle.
+      # Kaynak sayfada doctype ve head etiketleri yok. Pages için başına ekle.
       - name: Sayfa başlığını ekle
         run: sed -i '1i <!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">' site/index.html
       - uses: actions/configure-pages@v5

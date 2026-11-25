@@ -1,6 +1,8 @@
 Praat Türkçe arayüz (Linux, x86_64)
 ===================================
 
+Praat 7.0.03'ün değiştirilmiş sürümüdür (Kasım 2026). Resmî Praat değildir.
+
 1. Arşivi bir klasöre açın.
 2. praat dosyasını çalıştırın: ./praat
    Arayüz Türkçe açılır.
@@ -20,4 +22,4 @@ Praat'ı kapatıp yeniden açın.
 Scriptler İngilizce komut adlarıyla çalışmaya devam eder.
 Terimler ve ayrıntılar için: https://github.com/Underday/Praat-turkish (README_TR.md, TERIMLER.md)
 
-Praat: Paul Boersma ve David Weenink, https://www.praat.org (GPL lisansı).
+Praat: Paul Boersma ve David Weenink, https://www.praat.org (GPL 3 ya da sonrası, lisans metni COPYING dosyasında).

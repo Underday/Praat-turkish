@@ -36,6 +36,7 @@ cp "$CALISMA/Praat.exe" "$DAGITIM/"
 ${ONEK}strip "$DAGITIM/Praat.exe" || true
 cp "$DEPO/ceviri/ceviri_tr.tsv" "$DAGITIM/"
 cp "$DEPO/ceviri/windows/BENIOKU.txt" "$DAGITIM/"
+cp "$DEPO/main/gpl-3.0.txt" "$DAGITIM/COPYING.txt"
 rm -rf "$DAGITIM/plugin_TurkceAraclar"
 cp -r "$DEPO/ceviri/plugin_TurkceAraclar" "$DAGITIM/"
 ( cd "$CALISMA/dagitim" && rm -f "Praat-tr-$SURUM-win-x64.zip" && zip -qr "Praat-tr-$SURUM-win-x64.zip" "Praat-tr-$SURUM-win-x64" )

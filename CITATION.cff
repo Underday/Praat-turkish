@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "Bu yazılımı kullanırsanız lütfen aşağıdaki gibi kaynak gösterin. Praat'ın kendisini de ayrıca kaynak gösterin (references)."
+title: "Praat Türkçe: Praat için Türkçe arayüz ve Türkçe araçlar"
+type: software
+authors:
+  - family-names: Korkmaz
+    given-names: Abdullah Talha
+    alias: Underday
+    orcid: "https://orcid.org/0009-0009-3785-1099"
+version: "0.3"
+date-released: "2026-11-25"
+license: GPL-3.0-or-later
+repository-code: "https://github.com/Underday/Praat-turkish"
+url: "https://underday.github.io/Praat-turkish/"
+abstract: >-
+  Ses ve konuşma analizi programı Praat'ın (7.0.03) Türkçe arayüzlü,
+  değiştirilmiş ve resmî olmayan sürümü. Arayüz çeviri katmanı, gerekçeli
+  terim sözlüğü ve ses kalitesi, spektral eğim, CPPS, etiketli aralık ve
+  toplu klasör ölçümleri için Türkçe araçlar eklentisi içerir.
+keywords:
+  - Praat
+  - phonetics
+  - speech analysis
+  - voice analysis
+  - Turkish
+  - localization
+  - speech-language pathology
+references:
+  - type: software
+    title: "Praat: doing phonetics by computer"
+    authors:
+      - family-names: Boersma
+        given-names: Paul
+      - family-names: Weenink
+        given-names: David
+      - family-names: Shchupak
+        given-names: Anastasia
+    version: "7.0.03"
+    url: "https://praat.org"
+    license: GPL-3.0-or-later
