@@ -1,5 +1,7 @@
 # Praat Türkçe arayüz
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24525320.svg)](https://doi.org/10.5281/zenodo.24525320) [![Son sürüm](https://img.shields.io/github/v/release/Underday/Praat-turkish?label=s%C3%BCr%C3%BCm)](https://underday.github.io/Praat-turkish/)
+
 Bu depo, Praat'ın (konuşma analizi ve fonetik programı, https://praat.org) arayüzünü Türkçeye çevirmek için tutuluyor. Praat'ın kendi kaynak koduna çok küçük bir çeviri katmanı ekleniyor, çeviriler tek bir sözlük dosyasında duruyor.
 
 **Praat 7.0.03'ün değiştirilmiş sürümüdür (Kasım 2026). Resmî Praat değildir.** Praat'ın kendisi Paul Boersma ve David Weenink tarafından geliştirilir. Bu sürümü kullanan çalışmalarda Praat'ı da [kendi istediği biçimde](https://www.fon.hum.uva.nl/praat/manual/FAQ__How_to_cite_Praat.html) kaynak gösterin.
@@ -132,6 +134,14 @@ Kaynak: Kılıç, M. A. (2014). Özelleştirilmiş Praat programı ile uygulama.
 - Düzenleyicinin çizim alanında açıklamalar ("türetilmiş spektrogram") ve süre çubukları çevriliyor. Eksen yazıları, Çizim penceresine çizilen yazılar, hata mesajları ve kılavuz sayfaları çevrilmiyor.
 - Linux'ta ve Windows'ta (Wine altında) denendi. macOS tarafı henüz bağlanmadı.
 - Praat'ın güven onayı penceresinin metinleri çok satırlı olduğu için çevrilmiyor.
+
+## Atıf
+
+Bu sürümü bir çalışmada kullandıysanız kaynak gösterebilirsiniz (APA):
+
+> Korkmaz, A. T. (2026). *Praat Türkçe: Praat için Türkçe arayüz ve Türkçe araçlar* [Bilgisayar yazılımı]. Zenodo. https://doi.org/10.5281/zenodo.24525320
+
+Bu DOI her zaman en son sürüme gider. Belirli bir sürümü göstermek için Zenodo'daki sürüm DOI'sini kullanın (0.3: https://doi.org/10.5281/zenodo.24525321). Praat'ın kendisini de [Praat'ın istediği biçimde](https://www.fon.hum.uva.nl/praat/manual/FAQ__How_to_cite_Praat.html) ayrıca kaynak gösterin. GitHub'daki "Cite this repository" düğmesi `CITATION.cff` dosyasından aynı bilgiyi verir.
 
 ## Lisans
 
