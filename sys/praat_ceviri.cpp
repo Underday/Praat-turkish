@@ -17,7 +17,7 @@
 /*
 	Çeviri sürümü. Depoda yeni sürüm "tr-v0.2" biçiminde bir GitHub Release olarak yayımlanır.
 */
-#define CEVIRI_SURUM  U"0.3"
+#define CEVIRI_SURUM  U"0.3.1"
 #define CEVIRI_YAPAN  U"Abdullah Talha Korkmaz (Underday)"
 #define CEVIRI_EPOSTA  U"github.com/Underday"
 #define CEVIRI_DEPO_API  U"https://api.github.com/repos/Underday/Praat-turkish/releases/latest"
