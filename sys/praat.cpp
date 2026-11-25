@@ -948,12 +948,23 @@ void praat_dontUsePictureWindow () { praatP.dontUsePictureWindow = true; }
 	#endif
 #elif defined (_WIN32)
 	static int cb_userMessage () {
-		autoPraatBackground background;
-		try {
-			praat_executeScript_noGUI (& messageFile, true);   // trust all messages, because they are sent by other apps that have control
-		} catch (MelderError) {
-			Melder_flushError (Melder_upperCaseAppName(), U": message not completely handled.");
+		/*
+			Türkçe arayüz: WM_USER, sendpraat dışında da gelir. GuiDialog_run içindeki IsDialogMessage
+			pencereye DM_GETDEFID gönderir, bu da WM_USER ile aynı sayıdır. O zaman mesaj dosyası yoktur
+			ya da önceki bir mesajdan kalmıştır. Dosya yoksa bir şey yapılmaz (Linux'taki gibi),
+			işlenen dosya silinir ki aynı mesaj ikinci kez çalışmasın.
+		*/
+		if (! MelderFile_exists (& messageFile))
+			return 0;
+		{// scope
+			autoPraatBackground background;
+			try {
+				praat_executeScript_noGUI (& messageFile, true);   // trust all messages, because they are sent by other apps that have control
+			} catch (MelderError) {
+				Melder_flushError (Melder_upperCaseAppName(), U": message not completely handled.");
+			}
 		}
+		MelderFile_delete (& messageFile);
 		return 0;
 	}
 	#if 0
