@@ -1,4 +1,6 @@
-> **Türkçe arayüz:** bu dal Praat arayüzünün Türkçe çevirisini içerir. Kurulum ve katkı için [README_TR.md](README_TR.md), terimler için [TERIMLER.md](TERIMLER.md).
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24525320.svg)](https://doi.org/10.5281/zenodo.24525320) [![Son sürüm](https://img.shields.io/github/v/release/Underday/Praat-turkish?label=s%C3%BCr%C3%BCm)](https://underday.github.io/Praat-turkish/)
+
+> **Praat Türkçe:** Praat 7.0.03'ün Türkçe arayüzlü, değiştirilmiş ve resmî olmayan sürümü. İndirme ve kurulum için [tanıtım sayfası](https://underday.github.io/Praat-turkish/), kaynaktan derleme, katkı ve atıf için [README_TR.md](README_TR.md), terimler için [TERIMLER.md](TERIMLER.md).
 
 # Praat: doing phonetics by computer
 
