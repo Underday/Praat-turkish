@@ -14,7 +14,7 @@ Praat.exe, ceviri_tr.tsv ve plugin_TurkceAraclar aynı klasörde durmalı. Sözl
 Praat'ı kapatıp yeniden açın. Türkçeye dönmek için İngilizce arayüzde
 Praat > Settings > Interface language... menüsünden "Turkish" seçin.
 
-Program henüz dijital olarak imzalı olmadığı için Windows ilk açılışta
+Program dijital olarak imzalı olmadığı için Windows ilk açılışta
 "Windows bilgisayarınızı korudu" uyarısı verebilir. Programda bir sorun olduğu
 anlamına gelmez. Yazının altındaki "Ek bilgi" bağlantısına, sonra "Yine de çalıştır"
 düğmesine tıklayın. Aynı klasörden açtıkça bir daha sorulmaz.

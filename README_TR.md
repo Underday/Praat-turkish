@@ -6,7 +6,7 @@ Bu depo, Praat'ın (konuşma analizi ve fonetik programı, https://praat.org) ar
 
 **Praat 7.0.03'ün değiştirilmiş sürümüdür (Kasım 2026). Resmî Praat değildir.** Praat'ın kendisi Paul Boersma ve David Weenink tarafından geliştirilir. Bu sürümü kullanan çalışmalarda Praat'ı da [kendi istediği biçimde](https://www.fon.hum.uva.nl/praat/manual/FAQ__How_to_cite_Praat.html) kaynak gösterin.
 
-**İndirme:** kurulum anlatımı ve indirme düğmesi [tanıtım sayfasında](https://underday.github.io/Praat-turkish/). Paketler [Releases](https://github.com/Underday/Praat-turkish/releases/latest) sayfasında da duruyor. Windows imzası, gizlilik (açılıştaki sürüm denetimi) ve kaldırma: [Code signing policy](CODE_SIGNING_POLICY.md).
+**İndirme:** kurulum anlatımı ve indirme düğmesi [tanıtım sayfasında](https://underday.github.io/Praat-turkish/). Paketler [Releases](https://github.com/Underday/Praat-turkish/releases/latest) sayfasında da duruyor.
 
 ![Nesneler penceresi](ceviri/ekran/nesneler-penceresi.png)
 ![TextGrid düzenleyici](ceviri/ekran/textgrid-duzenleyici.png)
