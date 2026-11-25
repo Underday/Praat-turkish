@@ -15,6 +15,12 @@
 .yapan { font-size: 0.9rem; color: var(--muted); margin-top: 6px; }
 .yapan a { color: var(--fg); font-weight: 500; }
 .sag { gap: 88px; }
+/* Resim solda menünün altında küçük kalıyordu: sağ sütunda açılış cümlesinin yanında büyük durur, yazı çevresinden akar. */
+.giris::after { content: ""; display: block; clear: both; }
+.giris .resim { float: right; width: min(46%, 320px); max-width: none; margin: 0 0 12px 24px; shape-outside: circle(48% at 50% 46%); }
+.giris .resim svg { width: 100%; height: auto; max-height: none; aspect-ratio: 1; }
+.giris .resim figcaption { text-align: center; padding-left: 0; }
+@media (max-width: 860px) { .giris .resim { float: none; width: min(100%, 300px); margin: 0 0 16px; } }
 
 section > h2 { margin-bottom: 18px; }
 .kucuk { font-size: 0.9rem; color: var(--muted); margin: 0; }
@@ -102,10 +108,6 @@ dl.araclar > div.grup { display: block; }
         <a href="#hakkinda">Hakkında</a>
       </nav>
 
-      <figure class="resim">
-        <svg id="resim" viewBox="0 0 400 400" role="img" aria-label="Rastgele renkli bir şekil ve üzerinde spektrogramdaki formant izlerine benzeyen çizgiler. Yenilemek için tıklayın."></svg>
-        <figcaption><button type="button" class="yenile" id="yenile"><span class="yenile-ok" aria-hidden="true">↻</span> Başka bir tane çiz</button></figcaption>
-      </figure>
 
       <div class="alt-satir">
         <nav class="baglantilar" aria-label="Bağlantılar">
@@ -118,7 +120,13 @@ dl.araclar > div.grup { display: block; }
   </aside>
 
   <main class="sag">
-    <p class="acilis">Aynı Praat, aynı ölçümler. <b>Menüler, pencereler ve ses raporu</b> artık Türkçe. İndirip klasöre çıkarmanız yeterli.</p>
+    <div class="giris">
+      <figure class="resim">
+        <svg id="resim" viewBox="0 0 400 400" role="img" aria-label="Rastgele renkli bir şekil ve üzerinde spektrogramdaki formant izlerine benzeyen çizgiler. Yenilemek için tıklayın."></svg>
+        <figcaption><button type="button" class="yenile" id="yenile"><span class="yenile-ok" aria-hidden="true">↻</span> Başka bir tane çiz</button></figcaption>
+      </figure>
+      <p class="acilis">Aynı Praat, aynı ölçümler. <b>Menüler, pencereler ve ses raporu</b> artık Türkçe. İndirip klasöre çıkarmanız yeterli.</p>
+    </div>
 
   <section id="indir" aria-labelledby="indir-baslik">
     <h2 id="indir-baslik">İndir</h2>
